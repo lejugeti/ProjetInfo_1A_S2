@@ -1,0 +1,11 @@
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\bin\Debug\netcoreapp3.1\Program.exe
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\bin\Debug\netcoreapp3.1\Program.deps.json
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\bin\Debug\netcoreapp3.1\Program.runtimeconfig.json
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\bin\Debug\netcoreapp3.1\Program.runtimeconfig.dev.json
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\bin\Debug\netcoreapp3.1\Program.dll
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\bin\Debug\netcoreapp3.1\Program.pdb
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\obj\Debug\netcoreapp3.1\Program.csprojAssemblyReference.cache
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\obj\Debug\netcoreapp3.1\Program.AssemblyInfoInputs.cache
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\obj\Debug\netcoreapp3.1\Program.AssemblyInfo.cs
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\obj\Debug\netcoreapp3.1\Program.dll
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfoS2\Program\obj\Debug\netcoreapp3.1\Program.pdb
