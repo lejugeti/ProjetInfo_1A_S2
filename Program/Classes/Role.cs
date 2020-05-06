@@ -21,5 +21,18 @@ namespace Program
             _nom = nom;
         }
 
+        //Méthodes
+        public static Role CreateRole()
+        {
+            Console.Write("Indiquez le rôle de cette personne : ");
+            string role = Console.ReadLine();
+
+            return new Role(role);
+        }
+
+        public void PrintInfos()
+        {
+            Console.Write($"{Nom} ");
+        }
     }
 }
