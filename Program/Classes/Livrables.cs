@@ -142,7 +142,7 @@ namespace Program
             if(LienExterne!=null) Console.WriteLine(LienExterne);
         }
 
-        public void PrintInfos(Projet.Escapes escapes)
+        public void PrintInfos(Escapes escapes)
         { 
             Console.WriteLine($" |Type : {Type}");
             escapes.Print();

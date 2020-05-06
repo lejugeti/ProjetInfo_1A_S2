@@ -48,7 +48,7 @@ namespace Program
             Console.WriteLine("");
         }
 
-        public virtual void PrintInfosCol(Projet.Escapes escapes, string nomInfo)
+        public virtual void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
 

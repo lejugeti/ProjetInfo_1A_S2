@@ -12,29 +12,7 @@ namespace Program
         {
             string Jour;
             string Mois;
-            string Annee;
-
-            //Constructeurs
-            /*public Date(string jour, string mois, string annee)
-            {
-                Jour = jour;
-                Mois = mois;
-                Annee = annee;
-            }
-            
-            public Date(string mois, string annee)
-            {
-                Jour = "00";
-                Mois = mois;
-                Annee = annee;
-            }
-            
-            public Date(string annee)
-            {
-                Jour = "00";
-                Mois = "00";
-                Annee = annee;
-            }*/
+            string Annee;           
 
             public Date(string date)
             {
@@ -67,44 +45,18 @@ namespace Program
             {
                 Console.WriteLine($"{Jour}/{Mois}/{Annee}");
             }
+            public void PrintCol(string suffixeDate)
+            {
+                //argument suffixeDate vient compléter le print de la date pour ajouter des précisions 
+                Console.Write($"Date {suffixeDate} : ");
+                Console.WriteLine($"{this.GetDateFormatee()}");
+            }
 
             public string GetDateFormatee()
             {
                 return $"{Jour}/{Mois}/{Annee}";
             }
             /* INSERER FONCTION IsChronologic qui vérifie si la date de début est bien antérieure à celle de fin*/
-        }
-
-        public struct Escapes
-        {
-            public List<string> Spaces;
-
-            public string this[int i]
-            {
-                get { return Spaces[i]; }
-                set { Spaces[i] = value; }
-            }
-
-            //Constructeur
-            public Escapes(string newSpaces)
-            {
-                Spaces = new List<string>();
-                Spaces.Add(newSpaces);
-            }
-
-            //Méthodes
-            public void Print()
-            {
-                for(int i = 0; i < Spaces.Count; i++)
-                {
-                    Console.Write($"{Spaces[i]}|");
-                }
-            }
-
-            public void Add(string spaces)
-            {
-                Spaces.Add(new String(' ', spaces.Length+1));
-            }
         }
 
         //Propriétés
@@ -448,24 +400,18 @@ namespace Program
                 Console.WriteLine("");
             }
 
-            void AfficherListeEncadrants(Intervenant[] encadrants)
+            void AfficherListeIntervenants(Intervenant[] encadrants, string typeIntervenant)
             {
-                //Escapes escapes = new Escapes(new String(' ', 0));
-                Console.WriteLine("\n===== Encadrants =====");
+                Console.WriteLine($"===== {typeIntervenant} =====");
+
+                Escapes escapes = new Escapes();
                 for (int i = 0; i < encadrants.Length; i++)
                 {
-                    string labelEncadrant = $"Encadrants {i + 1}";
-                    /*if (encadrants[i] is Enseignant) 
-                    {
-                        Enseignant tmpEncadrant = encadrants[i] as Enseignant;
-                        *//*encadrants[i].PrintInfos(labelEncadrant);*//*
-                        tmpEncadrant.PrintInfos(labelEncadrant);
-                    } */
-                    
-                    encadrants[i].PrintInfos(labelEncadrant);
-                   
+                    string labelEncadrant = $"{typeIntervenant} {i + 1}";                   
+                    encadrants[i].PrintInfosCol(escapes, labelEncadrant);
                     Console.WriteLine("");
                 }
+                Console.WriteLine("");
             }
 
             Console.WriteLine("====== PROJET ======");
@@ -475,8 +421,12 @@ namespace Program
             AfficherListeInfos("Promotion", Promotions);
             Console.WriteLine($"Sujet : {Sujet}");
             AfficherListeInfos("Mots clés", MotsCles);
+            DateDebut.PrintCol("de début");
+            DateFin.PrintCol("de fin");
             AfficherListeLivrables(Livrables);
-            AfficherListeEncadrants(Encadrants);
+            AfficherListeIntervenants(Encadrants, "Encadrants");
+            AfficherListeIntervenants(Reviewers, "Reviewers");
+            AfficherListeIntervenants(Eleves, "Eleves");
         }
     }
 }

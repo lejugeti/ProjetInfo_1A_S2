@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Program.Classes
+namespace Program
 {
     class Escapes
     {
-        protected List<string> Spaces { get; set; }
+        public List<string> Spaces { get; set; }
 
         public string this[int i]
         {

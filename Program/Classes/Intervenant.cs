@@ -167,7 +167,7 @@ namespace Program
         }
         public virtual void PrintInfos(string role)
         {
-            Projet.Escapes escapes = new Projet.Escapes(new String(' ', role.Length + 1));
+            Escapes escapes = new Escapes(new String(' ', role.Length + 1));
             Console.Write($"{role} ");
             Console.WriteLine($"Nom : {Nom}");
             escapes.Print();
@@ -184,7 +184,7 @@ namespace Program
             Console.WriteLine("");
         }
         
-        public virtual void PrintInfosCol(Projet.Escapes escapes, string nomInfo)
+        public virtual void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
             Console.Write(nomInfo);
@@ -204,7 +204,7 @@ namespace Program
             }
             Console.WriteLine("");
 
-            escapes.Spaces.RemoveAt(1);
+            escapes.Spaces.RemoveAt(escapes.Spaces.Count - 1);
         }
     }
 
@@ -288,7 +288,7 @@ namespace Program
             Matiere.PrintInfos();
         }
 
-        public override void PrintInfosCol(Projet.Escapes escapes, string nomInfo)
+        public override void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
 
@@ -313,7 +313,7 @@ namespace Program
             escapes.Print();
             Matiere.PrintInfosCol(escapes, "Matière");
 
-            escapes.Spaces.RemoveAt(1);
+            escapes.Spaces.RemoveAt(escapes.Spaces.Count - 1);
         }
     }
 
@@ -380,7 +380,7 @@ namespace Program
             Console.WriteLine($"{escapes}|Organisme : {Organisme} ");
         }
 
-        public override void PrintInfosCol(Projet.Escapes escapes, string nomInfo)
+        public override void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
 
@@ -402,8 +402,8 @@ namespace Program
             Console.WriteLine("");
             escapes.Print();
             Console.WriteLine($"Organisme : {Organisme}");
-            
-            escapes.Spaces.RemoveAt(1);
+
+            escapes.Spaces.RemoveAt(escapes.Spaces.Count - 1);
         }
     }
 
@@ -527,7 +527,7 @@ namespace Program
             Console.WriteLine($"{escapes}|Année : {Annee}");
         }
 
-        public override void PrintInfosCol(Projet.Escapes escapes, string nomInfo)
+        public override void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
 
@@ -552,7 +552,7 @@ namespace Program
             escapes.Print();
             Console.WriteLine($"Année : {Annee}");
 
-            escapes.Spaces.RemoveAt(1);
+            escapes.Spaces.RemoveAt(escapes.Spaces.Count - 1);
         }
     }
 
