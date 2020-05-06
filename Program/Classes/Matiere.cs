@@ -8,7 +8,6 @@ namespace Program
     {
         protected string _nom;
         protected string _code;
-        protected string[] _modeEvaluation;
 
         //Propriétés
         public string Nom
@@ -21,17 +20,45 @@ namespace Program
             get { return _code; }
             set { _code = value; }
         }
-        public string[] ModeEvaluation
-        {
-            get { return _modeEvaluation; }
-            set { _modeEvaluation = value; }
-        }
+
 
         //Constructeur
-        public Matiere(string nom, string code, string[] modeEval)
+        public Matiere(string nom, string code)
         {
+            Nom = nom;
             Code = code;
-            ModeEvaluation = modeEval;
+        }
+
+        //Méthode
+        public static Matiere CreateMatiere()
+        {
+            Console.Write("Rentrez la matière de l'enseignant : ");
+            string nom = Console.ReadLine();
+            Console.Write("Rentrez le Code de la matière : ");
+            string code = Console.ReadLine();
+
+            return new Matiere(nom, code);
+        }
+
+        public void PrintInfos()
+        {
+            Console.Write("Matière");
+            Console.WriteLine($" | Nom : {Nom}");
+            Console.WriteLine($"        | Code : {Code}");
+            Console.WriteLine("");
+        }
+
+        public virtual void PrintInfosCol(Escapes escapes, string nomInfo)
+        {
+            escapes.Add(nomInfo);
+
+            Console.Write(nomInfo);
+            //Permet d'afficher les infos de l'individu 
+            Console.WriteLine($" |Nom : {Nom}");
+            escapes.Print();
+            Console.WriteLine($"Code : {Code}");
+            
+            escapes.Spaces.RemoveAt(1);
         }
     }
 }

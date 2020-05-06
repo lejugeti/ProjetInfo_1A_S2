@@ -10,39 +10,21 @@ namespace Program
         static void Main(string[] args)
         {
             Role role = new Role("tuteur");
-            Matiere matiere = new Matiere("cognition", "666", new string[] { "projets relous" });
-            Livrable livrable = new Livrable("vidéo", "aujourd'hui", "ceci est un livrable");
-            Intervenant encadrant = new Enseignant("lespinet", "véro", new Role[] { role }, new string[] { "ISM" }, new Matiere[] { matiere });
-            Eleve eleve = new Eleve("Parize", "antoine", new Role[] { role }, "2022", "2019-2020");
+            Matiere matiere = new Matiere("cognition", "666");
+            Projet.Date date = new Projet.Date("20/10/2020");
+            Intervenant encadrant = new Enseignant("lespinet", "véro", new Role[] { role, role }, "ISM", matiere);
+            Livrable livrable = new Livrable("vidéo", date, "ceci est un livrable", encadrant);
+            Enseignant enseignant = new Enseignant("lespinet", "véro", new Role[] { role, role }, "ISM", matiere);
+            Intervenant[] plusieursIntervenants = new Intervenant[] { encadrant, encadrant };
+            Eleve eleve = new Eleve("Parize", "antoine", new Role[] { role }, "2022", "1A");
+            Projet projet = new Projet("projet de gestion de projets", "info", 1, new string[] { "2022", "2020" }, "bimbamboom", new string[] { "projet" },
+                new Livrable[] { livrable , livrable}, plusieursIntervenants, new Intervenant[] { encadrant }, new Eleve[] { eleve }, date, date);
 
-            Projet projet = new Projet("info", 1, "2020", new string[] { "2022" }, "bimbamboom", new string[] { "projet" },
-                new Livrable[] { livrable }, encadrant, new Intervenant[] { encadrant }, new Eleve[] { eleve }, "mtn", "là", 1);
-
-            Console.WriteLine(projet.Sujet);
-
-            string[] AjoutMotsCles()
-            {
-                Console.WriteLine("Veuillez choisir au moins un mot clé pour qualifier le projet.");
-                List<string> motsCles = new List<string>();
-                bool done = false;
-                while (!done)
-                {
-                    Console.Write("Entrez un mot clé ou tapez Y pour quitter : ");
-                    string input = Console.ReadLine();
-
-                    if (input.ToUpper() == "Y" && motsCles.Count > 0)
-                    {
-                        done = true;
-                    }
-                    else
-                    {
-                        motsCles.Add(input);
-                    }
-                }
-
-                return motsCles.ToArray();
-            }
-
+            Intervenant test = new Eleve("Parize", "antoine", new Role[] { role }, "2022", "1A");
+            Externe externe = new Externe("Parize", "antoine", new Role[] { role }, "2022");
+           
+            projet.PrintInfos();
+            
             
 
             Console.ReadKey();
