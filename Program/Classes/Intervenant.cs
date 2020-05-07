@@ -411,6 +411,8 @@ namespace Program
     {
         protected string _promotion;
         protected string _annee;
+        protected static List<Eleve> _listeEleves;
+        protected List<Projet> _listeProjets;
 
         //Propriétés
         public string Promotion
@@ -424,14 +426,37 @@ namespace Program
             set { _annee = value; }
         }
 
+        public static List<Eleve> ListeEleves
+        {
+            get { return _listeEleves; }
+        }
+
+        public List<Projet> ListeProjets
+        {
+            get { return _listeProjets;  }
+        }
+
         //Constructeur
         public Eleve(string nom, string prenom, Role[] roles, string promotion, string annee) : base(nom, prenom, roles)
         {
             _promotion = promotion;
             _annee = annee;
+            _listeEleves.Add(this);
         }
 
         //Méthodes
+        public void AddProjet(Projet projet)
+        {
+            _listeProjets.Add(projet);
+        }
+
+        public void DeleteProjet(Projet projet)
+        {
+            if (_listeProjets.Contains(projet))
+            {
+                _listeProjets.Remove(projet);   
+            }
+        }
         public static Eleve CreateEleve(string nom, string prenom, Role[] roles)
         {
             // promotion de l'élève

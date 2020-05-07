@@ -12,7 +12,7 @@ namespace Program
         {
             string Jour;
             string Mois;
-            string Annee;           
+            string Annee;
 
             public Date(string date)
             {
@@ -22,6 +22,11 @@ namespace Program
                 Annee = splitted[2];
             }
 
+            public String GetAnnee()
+            {
+                return Annee;
+            }
+            
             //Méthodes
             public static bool IsDate(string date)
             {
@@ -59,6 +64,8 @@ namespace Program
             /* INSERER FONCTION IsChronologic qui vérifie si la date de début est bien antérieure à celle de fin*/
         }
 
+        private static List<Projet> _allProjects;
+
         //Propriétés
         public string Intitule { get; set; }
         public string Type { get; set; }
@@ -72,6 +79,11 @@ namespace Program
         public Eleve[] Eleves { get; set; }
         public Date DateDebut { get; set; }
         public Date DateFin { get; set; }
+
+        public static List<Projet> AllProjects
+        {
+            get { return _allProjects; }
+        }
 
         //Constructeur
         public Projet(string intitule, string type, int nbEleves, string[] promos, string sujet, string[] motsCles, Livrable[] livrables, Intervenant[] encadrants,
@@ -89,6 +101,7 @@ namespace Program
             Eleves = eleves;
             DateDebut = debut;
             DateFin = fin;
+            _allProjects.Add(this);
 
         }
 
