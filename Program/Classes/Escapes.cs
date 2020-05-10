@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program
 {
-    class Escapes
+    public class Escapes
     {
         public List<string> Spaces { get; set; }
 
@@ -25,7 +27,7 @@ namespace Program
             Spaces = new List<string>();
             Spaces.Add(newSpaces);
         }
-
+        
         //Méthodes
         public void Print()
         {

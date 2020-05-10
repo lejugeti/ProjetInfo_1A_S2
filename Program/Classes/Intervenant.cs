@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program
-{
-    class Intervenant
+{   
+    [XmlInclude(typeof(Enseignant))]
+    public class Intervenant
     {
         protected string _nom;
         protected string _prenom;
@@ -40,7 +43,10 @@ namespace Program
             _prenom = prenom;
             _roles = roles;
         }
+        public Intervenant()
+        {
 
+        }
         //Méthodes
         public static Intervenant CreateIntervenant()
         {
@@ -208,7 +214,7 @@ namespace Program
         }
     }
 
-    class Enseignant : Intervenant
+    public class Enseignant : Intervenant
     {
         protected string _laboratoire;
         protected Matiere _matiere;
@@ -231,6 +237,10 @@ namespace Program
         {
             _laboratoire = laboratoire;
             _matiere = matiere;
+        }
+        public Enseignant()
+        {
+
         }
 
         //Méthodes
@@ -317,7 +327,8 @@ namespace Program
         }
     }
 
-    class Externe : Intervenant
+
+    public class Externe : Intervenant
     {
         protected string _organisme;
 
@@ -332,6 +343,10 @@ namespace Program
         public Externe(string nom, string prenom, Role[] roles, string organisme) : base(nom, prenom, roles)
         {
             _organisme = organisme;
+        }
+        public Externe()
+        {
+
         }
 
         //Méthodes 
@@ -407,7 +422,7 @@ namespace Program
         }
     }
 
-    class Eleve : Intervenant
+    public class Eleve : Intervenant
     {
         protected string _promotion;
         protected string _annee;
@@ -429,6 +444,10 @@ namespace Program
         {
             _promotion = promotion;
             _annee = annee;
+        }
+        public Eleve()
+        {
+
         }
 
         //Méthodes

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program
 {
-    class Projet
+    public class Projet
     {
         //Structures
         public struct Date
@@ -92,6 +94,10 @@ namespace Program
 
         }
 
+        public Projet()
+        {
+
+        }
         //Méthodes
         public static Projet CreateProjet()
         {
