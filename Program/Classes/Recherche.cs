@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program.Classes
 {
+
     static class Recherche
     {
         //Méthodes
@@ -57,6 +60,7 @@ namespace Program.Classes
 
             return projetsAnnee;
         }
+
 
         /**
          * Recherche par promotion

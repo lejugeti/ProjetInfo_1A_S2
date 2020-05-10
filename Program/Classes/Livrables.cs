@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program
 {
-    class Livrable
+    public class Livrable
     {
         protected string _type;
         protected Projet.Date _deadline;
@@ -61,7 +63,10 @@ namespace Program
             _deadline = deadline;
             _description = description;
         }
+        public Livrable()
+        {
 
+        }
         //Méthodes
         public static Livrable CreateLivrable()
         {

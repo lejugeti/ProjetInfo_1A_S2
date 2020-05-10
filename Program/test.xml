@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProjet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Projet>
+    <Intitule>projet de gestion de projets</Intitule>
+    <Type>info</Type>
+    <NbEleves>1</NbEleves>
+    <Promotions>
+      <string>2022</string>
+      <string>2020</string>
+    </Promotions>
+    <Sujet>bimbamboom</Sujet>
+    <MotsCles>
+      <string>projet</string>
+    </MotsCles>
+    <Livrables>
+      <Livrable>
+        <Type>vidéo</Type>
+        <Deadline />
+        <Description>ceci est un livrable</Description>
+        <Client xsi:type="Enseignant">
+          <Nom>lespinet</Nom>
+          <Prenom>véro</Prenom>
+          <Roles>
+            <Role>
+              <Nom>tuteur</Nom>
+            </Role>
+            <Role>
+              <Nom>tuteur</Nom>
+            </Role>
+          </Roles>
+          <Laboratoire>ISM</Laboratoire>
+          <Matiere>
+            <Nom>cognition</Nom>
+            <Code>666</Code>
+          </Matiere>
+        </Client>
+      </Livrable>
+      <Livrable>
+        <Type>vidéo</Type>
+        <Deadline />
+        <Description>ceci est un livrable</Description>
+        <Client xsi:type="Enseignant">
+          <Nom>lespinet</Nom>
+          <Prenom>véro</Prenom>
+          <Roles>
+            <Role>
+              <Nom>tuteur</Nom>
+            </Role>
+            <Role>
+              <Nom>tuteur</Nom>
+            </Role>
+          </Roles>
+          <Laboratoire>ISM</Laboratoire>
+          <Matiere>
+            <Nom>cognition</Nom>
+            <Code>666</Code>
+          </Matiere>
+        </Client>
+      </Livrable>
+    </Livrables>
+    <Encadrants>
+      <Intervenant xsi:type="Enseignant">
+        <Nom>lespinet</Nom>
+        <Prenom>véro</Prenom>
+        <Roles>
+          <Role>
+            <Nom>tuteur</Nom>
+          </Role>
+          <Role>
+            <Nom>tuteur</Nom>
+          </Role>
+        </Roles>
+        <Laboratoire>ISM</Laboratoire>
+        <Matiere>
+          <Nom>cognition</Nom>
+          <Code>666</Code>
+        </Matiere>
+      </Intervenant>
+      <Intervenant xsi:type="Enseignant">
+        <Nom>lespinet</Nom>
+        <Prenom>véro</Prenom>
+        <Roles>
+          <Role>
+            <Nom>tuteur</Nom>
+          </Role>
+          <Role>
+            <Nom>tuteur</Nom>
+          </Role>
+        </Roles>
+        <Laboratoire>ISM</Laboratoire>
+        <Matiere>
+          <Nom>cognition</Nom>
+          <Code>666</Code>
+        </Matiere>
+      </Intervenant>
+    </Encadrants>
+    <Reviewers>
+      <Intervenant xsi:type="Enseignant">
+        <Nom>lespinet</Nom>
+        <Prenom>véro</Prenom>
+        <Roles>
+          <Role>
+            <Nom>tuteur</Nom>
+          </Role>
+          <Role>
+            <Nom>tuteur</Nom>
+          </Role>
+        </Roles>
+        <Laboratoire>ISM</Laboratoire>
+        <Matiere>
+          <Nom>cognition</Nom>
+          <Code>666</Code>
+        </Matiere>
+      </Intervenant>
+    </Reviewers>
+    <Eleves>
+      <Eleve>
+        <Nom>Parize</Nom>
+        <Prenom>antoine</Prenom>
+        <Roles>
+          <Role>
+            <Nom>tuteur</Nom>
+          </Role>
+        </Roles>
+        <Promotion>2022</Promotion>
+        <Annee>1A</Annee>
+      </Eleve>
+    </Eleves>
+    <DateDebut />
+    <DateFin />
+  </Projet>
+</ArrayOfProjet>

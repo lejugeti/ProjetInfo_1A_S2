@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program
 {
-    class Matiere
+    public class Matiere
     {
         protected string _nom;
         protected string _code;
@@ -27,6 +29,10 @@ namespace Program
         {
             Nom = nom;
             Code = code;
+        }
+        public Matiere()
+        {
+
         }
 
         //Méthode
