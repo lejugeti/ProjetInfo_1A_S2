@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program.Classes
 {
-    class Recherche
+    public class Recherche
     {   
         //Propriétés
         public Projet[] Resultat { get; set; }
 
         //Constructeur
-        protected Recherche(Projet[] resultat)
+        public Recherche(Projet[] resultat)
         {
             Resultat = resultat;
         }
 
+        public Recherche()
+        {
+
+        }
         //Méthodes
 
     }

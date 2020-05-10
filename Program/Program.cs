@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program
 {
@@ -22,10 +25,13 @@ namespace Program
 
             Intervenant test = new Eleve("Parize", "antoine", new Role[] { role }, "2022", "1A");
             Externe externe = new Externe("Parize", "antoine", new Role[] { role }, "2022");
-           
-            projet.PrintInfos();
+
+            Catalogue a = new Catalogue();
+            a.AddProjet(projet);
+            a.PrintCatalogue();
+
             
-            
+
 
             Console.ReadKey();
         }

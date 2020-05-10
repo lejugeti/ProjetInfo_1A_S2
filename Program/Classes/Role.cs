@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Program
 {
-    class Role
+    public class Role
     {
         protected string _nom;
 
@@ -20,7 +22,10 @@ namespace Program
         {
             _nom = nom;
         }
-
+        public Role()
+        {
+            
+        }
         //Méthodes
         public static Role CreateRole()
         {
