@@ -23,7 +23,7 @@ namespace Program
             Intervenant test = new Eleve("Parize", "antoine", new Role[] { role }, "2022", "1A");
             Externe externe = new Externe("Parize", "antoine", new Role[] { role }, "2022");
            
-            projet.PrintInfos();
+            //projet.PrintInfos();
             
             
 
