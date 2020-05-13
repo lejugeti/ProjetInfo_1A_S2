@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Program.Classes
@@ -15,20 +16,20 @@ namespace Program.Classes
          */
         public static List<Projet> RechercheParEleve(String nomEleve)
         {
-            List<Eleve> eleves = Eleve.ListeEleves;
+            List<Projet> projets = Projet.AllProjects;
             List<Projet> projetsEleve = new List<Projet>();
             
-            // Pour chaque élève
-            foreach (var eleve in eleves)
+            // Pour chaque projet
+            foreach (var projet in projets)
             {
-                // Si le nom de l'élève correspond à nomEleve
-                if (eleve.Nom.ToLower().Equals(nomEleve.ToLower()))
+                // Pour chaque élève associé à ce projet
+                foreach (var eleve in projet.Eleves)
                 {
-                    // Pour chaque projet de cet élève
-                    foreach (var projet in eleve.ListeProjets)
+                    // Si le nom de l'élève correspond au nom entré
+                    if (eleve.Nom.ToLower().Equals(nomEleve.ToLower()))
                     {
                         projetsEleve.Add(projet);
-                    }      
+                    }
                 }
             }
 
@@ -65,17 +66,17 @@ namespace Program.Classes
          */
         public static List<Projet> RechercheParPromotion(String promotion)
         {
-            List<Eleve> eleves = Eleve.ListeEleves;
+            List<Projet> projets = Projet.AllProjects;
             List<Projet> projetsPromotion = new List<Projet>();
 
-            // Pour chaque élève
-            foreach (var eleve in eleves) 
+            // Pour chaque projet
+            foreach (var projet in projets) 
             {
-                // Si la promotion de l'élève correspond à la promotion entrée
-                if (eleve.Promotion.Equals(promotion))
+                // Pour chaque élèves associés à ce projet
+                foreach (var eleve in projet.Eleves)
                 {
-                    // Pour chaque projet de cet élève
-                    foreach (var projet in eleve.ListeProjets)
+                    // Si la promotion de l'élève correspond à la promotion entrée
+                    if (eleve.Promotion.ToLower().Equals(promotion.ToLower()))
                     {
                         projetsPromotion.Add(projet);
                     }
@@ -152,7 +153,7 @@ namespace Program.Classes
             List<Projet> projetsPromotion = new List<Projet>();
             List<Projet> projetsMotsclef = new List<Projet>();
             List<Projet> projetsIntitule = new List<Projet>();
-            
+
             List<Projet> projets = new List<Projet>();
 
             // On recherche par tous les critères possibles avec la chaîne entrée
@@ -193,7 +194,17 @@ namespace Program.Classes
             }
 
             return projets;
-
         }
+
+        static void SortByIntitule(List<Projet> projets)
+        {
+            projets.OrderBy(projet => projet.Intitule);
+        }
+
+        static void SortByDate(List<Projet> projets)
+        {
+            projets.OrderBy(projet => projet.DateFin);
+        }
+        
     }
 }
