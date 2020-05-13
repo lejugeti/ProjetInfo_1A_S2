@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\aurelie\\Documents\\ENSC\\1A\\S6\\Programmation avancée\\ProjetInfo_1A_S2\\Program\\Program.csproj": {}
+    "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj": {}
   },
   "projects": {
-    "D:\\Users\\aurelie\\Documents\\ENSC\\1A\\S6\\Programmation avancée\\ProjetInfo_1A_S2\\Program\\Program.csproj": {
+    "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\aurelie\\Documents\\ENSC\\1A\\S6\\Programmation avancée\\ProjetInfo_1A_S2\\Program\\Program.csproj",
+        "projectUniqueName": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj",
         "projectName": "Program",
-        "projectPath": "D:\\Users\\aurelie\\Documents\\ENSC\\1A\\S6\\Programmation avancée\\ProjetInfo_1A_S2\\Program\\Program.csproj",
-        "packagesPath": "C:\\Users\\Aurélie\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\aurelie\\Documents\\ENSC\\1A\\S6\\Programmation avancée\\ProjetInfo_1A_S2\\Program\\obj\\",
+        "projectPath": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj",
+        "packagesPath": "C:\\Users\\Antoine\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Aurélie\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Antoine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -55,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
