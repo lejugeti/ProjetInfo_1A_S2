@@ -32,6 +32,8 @@ namespace Program
                     serializer.Serialize(sw, Projets);
                 }
             }
+
+
         }
 
         //Méthodes
@@ -73,6 +75,17 @@ namespace Program
             }
         }
 
+        public List<Projet> ToList()
+        {
+            List<Projet> projets = new List<Projet>();
+
+            foreach(Projet p in Projets)
+            {
+                projets.Add(p);
+            }
+
+            return projets;
+        }
         public void PrintCatalogue()
         {
             Console.WriteLine("===== Liste de tous les projets =====");

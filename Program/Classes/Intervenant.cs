@@ -7,11 +7,13 @@ using System.Xml.Serialization;
 namespace Program
 {   
     [XmlInclude(typeof(Enseignant))]
+    [XmlInclude(typeof(Externe))]
+    [XmlInclude(typeof(Eleve))]
     public class Intervenant
     {
-        protected string _nom;
-        protected string _prenom;
-        protected Role[] _roles;
+        public string _nom;
+        public string _prenom;
+        public Role[] _roles;
 
         //Propriétés
         public string Nom
@@ -113,6 +115,9 @@ namespace Program
             }
         }
 
+        /*
+         * Permet de créer un intervenant en indiquant directement sa spécification (eleve etc)
+         */
         public static Intervenant CreateIntervenant(string type)
         {
             Console.Write("Le nom de la personne : ");
@@ -154,6 +159,59 @@ namespace Program
                 return new Intervenant(nom, prenom, roles.ToArray());
             }
         }
+
+        public static Intervenant CreateIntervenant(Role role)
+        {
+            /*Console.WriteLine("============ Création d'un intervenant (Enseignant, Externe ou Elève ============");*/
+            Console.Write("Le nom de la personne : ");
+            string nom = Console.ReadLine();
+            Console.Write("Son Prénom : ");
+            string prenom = Console.ReadLine();
+
+            //Sélection spécification de la classe intervenant
+            string inputSpec;
+            bool doneSpec = false;
+            do
+            {
+                Console.WriteLine("Cette personne est un");
+                Console.WriteLine("Eleve : entrez 1,   Enseignant : entrez 2,  Externe : entrez 3,  Autre : entrez 4");
+
+                Regex regSpec = new Regex("^[1-4]$");
+                inputSpec = Console.ReadLine();
+
+                if (regSpec.Match(inputSpec).Success)
+                {
+                    doneSpec = true;
+                }
+                else
+                {
+                    Console.WriteLine("Votre entrée est incorrecte");
+                }
+            }
+            while (!doneSpec);
+
+            //Création des rôles de l'intervenant
+            Role[] roles = new Role[] { role };
+
+            //Création de l'intervenant
+            if (inputSpec == "1") //élève
+            {
+                return Eleve.CreateEleve(nom, prenom, roles);
+            }
+            else if (inputSpec == "2") //enseignant
+            {
+                return Enseignant.CreateEnseignant(nom, prenom, roles);
+            }
+            else if (inputSpec == "3")//externe
+            {
+                return Externe.CreateExterne(nom, prenom, roles);
+            }
+            else
+            {
+                return new Intervenant(nom, prenom, roles);
+            }
+        }
+
 
 
         public virtual void PrintInfos()
@@ -216,8 +274,8 @@ namespace Program
 
     public class Enseignant : Intervenant
     {
-        protected string _laboratoire;
-        protected Matiere _matiere;
+        public string _laboratoire;
+        public Matiere _matiere;
 
         //Propriétés
         public string Laboratoire
@@ -330,7 +388,7 @@ namespace Program
 
     public class Externe : Intervenant
     {
-        protected string _organisme;
+        public string _organisme;
 
         //Propriétés
         public string Organisme
@@ -352,7 +410,7 @@ namespace Program
         //Méthodes 
         public static Externe CreateExterne(string nom, string prenom, Role[] roles)
         {
-            Console.Write("Entre l'oganisme de l'intervenant : ");
+            Console.Write("Entrez l'oganisme de l'intervenant : ");
             string organisme = Console.ReadLine();
 
             return new Externe(nom, prenom, roles, organisme);
@@ -424,10 +482,8 @@ namespace Program
 
     public class Eleve : Intervenant
     {
-        protected string _promotion;
-        protected string _annee;
-        protected static List<Eleve> _listeEleves;
-        protected List<Projet> _listeProjets;
+        public string _promotion;
+        public string _annee;
 
         //Propriétés
         public string Promotion
@@ -441,22 +497,13 @@ namespace Program
             set { _annee = value; }
         }
 
-        public static List<Eleve> ListeEleves
-        {
-            get { return _listeEleves; }
-        }
 
-        public List<Projet> ListeProjets
-        {
-            get { return _listeProjets;  }
-        }
 
         //Constructeur
         public Eleve(string nom, string prenom, Role[] roles, string promotion, string annee) : base(nom, prenom, roles)
         {
             _promotion = promotion;
             _annee = annee;
-            _listeEleves.Add(this);
         }
         public Eleve()
         {
@@ -464,18 +511,6 @@ namespace Program
         }
 
         //Méthodes
-        public void AddProjet(Projet projet)
-        {
-            _listeProjets.Add(projet);
-        }
-
-        public void DeleteProjet(Projet projet)
-        {
-            if (_listeProjets.Contains(projet))
-            {
-                _listeProjets.Remove(projet);   
-            }
-        }
         public static Eleve CreateEleve(string nom, string prenom, Role[] roles)
         {
             // promotion de l'élève
@@ -485,7 +520,7 @@ namespace Program
             {
                 Console.Write("Rentrez la promotion de l'élève (ex : 2020) : ");
                 promoInput = Console.ReadLine();
-                if (Projet.Date.IsDate(promoInput))
+                if (Projet.Date.IsPromotion(promoInput))
                 {
                     donePromo = true;
                 }

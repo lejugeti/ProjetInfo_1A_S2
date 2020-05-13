@@ -25,7 +25,7 @@ namespace Program
         public Escapes(string newSpaces)
         {
             Spaces = new List<string>();
-            Spaces.Add(newSpaces);
+            Spaces.Add(new String(' ', newSpaces.Length + 1));
         }
         
         //Méthodes

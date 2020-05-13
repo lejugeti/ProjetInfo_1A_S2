@@ -12,9 +12,9 @@ namespace Program
         //Structures
         public struct Date
         {
-            string Jour;
-            string Mois;
-            string Annee;
+            public string Jour;
+            public string Mois;
+            public string Annee;
 
             public Date(string date)
             {
@@ -66,8 +66,6 @@ namespace Program
             /* INSERER FONCTION IsChronologic qui vérifie si la date de début est bien antérieure à celle de fin*/
         }
 
-        private static List<Projet> _allProjects;
-
         //Propriétés
         public string Intitule { get; set; }
         public string Type { get; set; }
@@ -75,20 +73,17 @@ namespace Program
         public string[] Promotions { get; set; }
         public string Sujet { get; set; }
         public string[] MotsCles { get; set; }
+        public Intervenant Client { get; set; }
         public Livrable[] Livrables { get; set; }
         public Intervenant[] Encadrants { get; set; } //tuteur ou personne qui gère le projet
         public Intervenant[] Reviewers { get; set; } //ceux qui notent
         public Eleve[] Eleves { get; set; }
         public Date DateDebut { get; set; }
         public Date DateFin { get; set; }
-
-        public static List<Projet> AllProjects
-        {
-            get { return _allProjects; }
-        }
+        
 
         //Constructeur
-        public Projet(string intitule, string type, int nbEleves, string[] promos, string sujet, string[] motsCles, Livrable[] livrables, Intervenant[] encadrants,
+        public Projet(string intitule, string type, int nbEleves, string[] promos, string sujet, string[] motsCles, Intervenant client, Livrable[] livrables, Intervenant[] encadrants,
             Intervenant[] reviewers, Eleve[] eleves, Date debut, Date fin)
         {
             Intitule = intitule;
@@ -97,13 +92,13 @@ namespace Program
             Promotions = promos;
             Sujet = sujet;
             MotsCles = motsCles;
+            Client = client;
             Livrables = livrables;
             Encadrants = encadrants;
             Reviewers = reviewers;
             Eleves = eleves;
             DateDebut = debut;
             DateFin = fin;
-            _allProjects.Add(this);
 
         }
 
@@ -193,14 +188,14 @@ namespace Program
 
             string AjoutSujet()
             {
-                Console.WriteLine("Quel est le sujet de votre projet ?");
+                Console.WriteLine("\nQuel est le sujet de votre projet ?");
                 string sujet = Console.ReadLine();
                 return sujet;
             }
 
             string[] AjoutMotsCles()
             {
-                Console.WriteLine("Veuillez choisir au moins un mot clé pour qualifier le projet.");
+                Console.WriteLine("\nVeuillez choisir au moins un mot clé pour qualifier le projet.");
                 List<string> motsCles = new List<string>();
                 bool done = false;
                 while (!done)
@@ -221,6 +216,14 @@ namespace Program
                 return motsCles.ToArray();
             }
 
+            Intervenant AjoutClient()
+            {
+                Console.WriteLine("\nVous allez maintenant devoir renseigner le client du projet.");
+                Intervenant client = Intervenant.CreateIntervenant(new Role("client"));
+                
+                return client;
+            }
+
             Livrable[] AjoutLivrables()
             {
                 bool doneLivrables = false;
@@ -230,7 +233,7 @@ namespace Program
                 {
                     livrables.Add(Livrable.CreateLivrable());
 
-                    Console.WriteLine("Voulez-vous ajouter un autre livrable ? Y/N");
+                    Console.WriteLine("\nVoulez-vous ajouter un autre livrable ? Y/N");
                     string repLivrable = Console.ReadLine();
 
                     if (repLivrable.ToUpper() == "N") doneLivrables = true;
@@ -241,7 +244,7 @@ namespace Program
 
             Intervenant[] AjoutEncadrant()
             {
-                Console.WriteLine("Vous allez maintenant devoir renseigner les différents encadrants du projet.");
+                Console.WriteLine("\nVous allez maintenant devoir renseigner les différents encadrants du projet.");
 
                 List<Intervenant> encadrants = new List<Intervenant>();
                 bool doneEncadrants = false;
@@ -252,14 +255,14 @@ namespace Program
                     if (encadrants.Count == 0)
                     {
                         Console.WriteLine("Rentrez à présent les informations du premier encadrant");
-                        encadrants.Add(Intervenant.CreateIntervenant());
+                        encadrants.Add(Intervenant.CreateIntervenant(new Role("Encadrant")));
                     }
                     else 
                     {
-                        Console.WriteLine("Voulez-vous ajouter un autre encadrant ? Y/N");
+                        Console.WriteLine("\nVoulez-vous ajouter un autre encadrant ? Y/N");
                         rep = Console.ReadLine();
 
-                        if (rep.ToUpper() == "Y") encadrants.Add(Intervenant.CreateIntervenant());
+                        if (rep.ToUpper() == "Y") encadrants.Add(Intervenant.CreateIntervenant(new Role("Encadrant")));
                         else if (rep.ToUpper() == "N") doneEncadrants = true; 
                         
                     }
@@ -271,7 +274,7 @@ namespace Program
 
             Intervenant[] AjoutReviewers()
             {
-                Console.WriteLine("Vous allez maintenant devoir renseigner les différents reviewers du projet.");
+                Console.WriteLine("\nVous allez maintenant devoir renseigner les différents reviewers du projet.");
 
                 List<Intervenant> reviewers = new List<Intervenant>();
                 bool doneReviewers = false;
@@ -282,14 +285,14 @@ namespace Program
                     if (reviewers.Count == 0)
                     {
                         Console.WriteLine("Rentrez à présent les informations du premier reviewer");
-                        reviewers.Add(Intervenant.CreateIntervenant());
+                        reviewers.Add(Intervenant.CreateIntervenant(new Role("Reviewer")));
                     }
                     else
                     {
-                        Console.WriteLine("Voulez-vous ajouter un autre reviewer ? Y/N");
+                        Console.WriteLine("\nVoulez-vous ajouter un autre reviewer ? Y/N");
                         rep = Console.ReadLine();
 
-                        if (rep.ToUpper() == "Y") reviewers.Add(Intervenant.CreateIntervenant());
+                        if (rep.ToUpper() == "Y") reviewers.Add(Intervenant.CreateIntervenant(new Role("Reviewer")));
                         else if (rep.ToUpper() == "N") doneReviewers = true;
 
                     }
@@ -301,32 +304,33 @@ namespace Program
 
             Eleve[] AjoutEleves()
             {
-                Console.WriteLine("Vous allez maintenant devoir renseigner les différents élèves présents sur le projet.");
+                Console.WriteLine("\nVous allez maintenant devoir renseigner les différents élèves présents sur le projet.");
 
-                List<Intervenant> reviewers = new List<Intervenant>();
-                bool doneReviewers = false;
+                List<Eleve> eleves = new List<Eleve>();
+                bool doneEleve = false;
                 do
                 {
                     string rep = "";
 
-                    if (reviewers.Count == 0)
+                    if (eleves.Count == 0)
                     {
-                        Console.WriteLine("Rentrez à présent les informations du premier élève");
-                        reviewers.Add(Intervenant.CreateIntervenant("eleve"));
+                        Console.WriteLine("\nRentrez à présent les informations du premier élève");
+                        eleves.Add(Intervenant.CreateIntervenant("eleve") as Eleve);    
                     }
                     else
                     {
-                        Console.WriteLine("Voulez-vous ajouter un autre reviewer ? Y/N");
+                        Console.WriteLine("\nVoulez-vous ajouter un autre élève ? Y/N");
                         rep = Console.ReadLine();
 
-                        if (rep.ToUpper() == "Y") reviewers.Add(Intervenant.CreateIntervenant("eleve"));
-                        else if (rep.ToUpper() == "N") doneReviewers = true;
+                        if (rep.ToUpper() == "Y") eleves.Add(Intervenant.CreateIntervenant("eleve") as Eleve); //downcast car l'instance créée est un intervenant de base
+                        else if (rep.ToUpper() == "N") doneEleve = true;
 
                     }
 
-                } while (!doneReviewers);
+                } while (!doneEleve);
 
-                return (Eleve[]) reviewers.ToArray();
+
+                return eleves.ToArray();
             }
 
             Date AjoutDate(bool debut, bool error)
@@ -336,18 +340,18 @@ namespace Program
                     switch (debut)
                     {
                         case true:
-                            Console.WriteLine("Veuillez rentrer une date de début du projet au format DD/MM/YYYY");
+                            Console.WriteLine("\nVeuillez rentrer une date de début du projet au format DD/MM/YYYY");
                             break;
 
                         case false:
-                            Console.WriteLine("Veuillez rentrer une date de fin du projet au format DD/MM/YYYY");
+                            Console.WriteLine("\nVeuillez rentrer une date de fin du projet au format DD/MM/YYYY");
                             break;
                     }
                     
                 }
                 else
                 {
-                    Console.WriteLine("Ce que vous avez rentré est incorrect. Pour rappel le format de l'année est DD/MM/YYYY");
+                    Console.WriteLine("\nCe que vous avez rentré est incorrect. Pour rappel le format de l'année est DD/MM/YYYY");
                 }
 
                 string input = Console.ReadLine(); 
@@ -372,6 +376,7 @@ namespace Program
             string[] promotions = AjoutPromotion();
             string sujetProjet = AjoutSujet();
             string[] motsCles = AjoutMotsCles();
+            Intervenant client = AjoutClient();
             Livrable[] livrables = AjoutLivrables();
             Intervenant[] encadrants = AjoutEncadrant();
             Intervenant[] reviewers = AjoutReviewers();
@@ -379,7 +384,7 @@ namespace Program
             Date dateDebut = AjoutDate(true, false);
             Date dateFin = AjoutDate(false, false);
 
-            return new Projet(intitule, type, nbEleves, promotions, sujetProjet, motsCles, livrables, encadrants, reviewers, eleves, dateDebut, dateFin);
+            return new Projet(intitule, type, nbEleves, promotions, sujetProjet, motsCles, client, livrables, encadrants, reviewers, eleves, dateDebut, dateFin);
         }
 
         public void PrintInfos()
