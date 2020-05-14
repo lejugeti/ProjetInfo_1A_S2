@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfoS2\\Program\\Program.csproj": {}
+    "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfoS2\\Program\\Program.csproj": {
+    "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfoS2\\Program\\Program.csproj",
+        "projectUniqueName": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj",
         "projectName": "Program",
-        "projectPath": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfoS2\\Program\\Program.csproj",
+        "projectPath": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\Program.csproj",
         "packagesPath": "C:\\Users\\Antoine\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfoS2\\Program\\obj\\",
+        "outputPath": "C:\\Users\\Antoine\\Documents\\Visual Studio 2019\\my_projects\\ProjetInfo_1A_S2\\Program\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
