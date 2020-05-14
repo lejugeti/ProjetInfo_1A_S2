@@ -116,6 +116,7 @@ namespace Program
                 string intitule = Console.ReadLine();
                 return intitule;
             }
+
             string AjoutTypeProjet()
             {
                 Console.WriteLine("Quel est le type de votre projet ?");
@@ -368,7 +369,6 @@ namespace Program
 
 
             //Exécution
-            Console.WriteLine("Vous avez choisi de créer un projet. Veuillez rentrer l'ensemble des informations demandées.");
 
             string intitule = AjoutIntitule();
             string type = AjoutTypeProjet();
@@ -413,7 +413,7 @@ namespace Program
             }
             void AfficherListeLivrables(Livrable[] livrables)
             {
-                Escapes escapes = new Escapes(new String(' ', 11));
+                Escapes escapes = new Escapes("Livrable 1");
                 Console.WriteLine("\n===== Livrables =====");
                 for(int i = 0; i<livrables.Length; i++)
                 {

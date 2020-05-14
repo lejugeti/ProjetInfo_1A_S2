@@ -118,7 +118,7 @@ namespace Program
             if (LienExterne != null)
             {
                 escapes.Print();
-                Console.WriteLine($"|Lien externe : {LienExterne}");
+                Console.WriteLine($"Lien externe : {LienExterne}");
             }
         }
     }

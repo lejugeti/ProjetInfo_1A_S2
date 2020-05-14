@@ -88,11 +88,16 @@ namespace Program
         }
         public void PrintCatalogue()
         {
+            if(Projets.Length == 0)
+            {
+                Console.WriteLine("Il n'y a pas encore de projets enregistrés");
+            }
             Console.WriteLine("===== Liste de tous les projets =====");
             for(int i = 0; i < Projets.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {Projets[i].Intitule}");
             }
+            Console.WriteLine("");
         }
 
         
