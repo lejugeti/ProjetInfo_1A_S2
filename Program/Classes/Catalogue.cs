@@ -12,6 +12,10 @@ namespace Program
         public Projet[] Projets { get; set; }
         
         //Constructeurs
+
+        /*
+         * Construit l'instance de Catalogue en s'appuyant sur le fichier XML contenant l'ensemble des projets.
+         */
         public Catalogue()
         {
             try
@@ -32,22 +36,24 @@ namespace Program
                     serializer.Serialize(sw, Projets);
                 }
             }
+        }
 
+        public Catalogue(List<Projet> projets)
+        {
+            Projets = projets.ToArray();
+        }
 
+        public Catalogue(Projet[] projets)
+        {
+            Projets = projets;
         }
 
         //Méthodes
         public void AddProjet(Projet projet)
         {
-            List<Projet> tmpProjet = new List<Projet>();
-
-            foreach(Projet p in Projets)
-            {
-                tmpProjet.Add(p);
-            }
-
+            List<Projet> tmpProjet = this.ToList();
             tmpProjet.Add(projet);
-            Projets = tmpProjet.ToArray();
+            Projets = tmpProjet.ToArray(); // on met à jour en mémoire la liste de projets de Catalogue
 
             XmlSerializer serializer = new XmlSerializer(typeof(Projet[]));
             using(StreamWriter sw = new StreamWriter("../../../test.xml"))
@@ -58,15 +64,9 @@ namespace Program
 
         public void RemoveProjet(int idProjet)
         {
-            List<Projet> tmpProjet = new List<Projet>();
-
-            foreach (Projet p in Projets)
-            {
-                tmpProjet.Add(p);
-            }
-
+            List<Projet> tmpProjet = this.ToList();
             tmpProjet.RemoveAt(idProjet);
-            Projets = tmpProjet.ToArray();
+            Projets = tmpProjet.ToArray(); // on met à jour en mémoire la liste de projets de Catalogue
 
             XmlSerializer serializer = new XmlSerializer(typeof(Projet[]));
             using (StreamWriter sw = new StreamWriter("../../../../test.xml"))
@@ -93,11 +93,13 @@ namespace Program
                 Console.WriteLine("Il n'y a pas encore de projets enregistrés");
             }
             Console.WriteLine("===== Liste de tous les projets =====");
-            for(int i = 0; i < Projets.Length; i++)
+            /*for(int i = 0; i < Projets.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {Projets[i].Intitule}");
             }
-            Console.WriteLine("");
+            Console.WriteLine("");*/
+
+            Program.AfficherListeProjets(Projets);
         }
 
         

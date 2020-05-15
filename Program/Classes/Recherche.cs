@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Program.Classes
+namespace Program
 {
     static class Recherche
     {
@@ -14,9 +14,9 @@ namespace Program.Classes
          * @param nomEleve Le nom de famille de l'élève concerné par la recherche
          * @return La liste des projets associés à cet élève
          */
-        public static List<Projet> RechercheParEleve(String nomEleve)
+        public static List<Projet> RechercheParEleve(Catalogue catalogue, String nomEleve)
         {
-            List<Projet> projets = Projet.AllProjects;
+            Projet[] projets = catalogue.Projets;
             List<Projet> projetsEleve = new List<Projet>();
             
             // Pour chaque projet
@@ -41,9 +41,9 @@ namespace Program.Classes
          * @param L'année concernée par la recherche
          * @return La liste des projets de cette année
          */
-        public static List<Projet> RechercheParAnnee(String annee)
+        public static List<Projet> RechercheParAnnee(Catalogue catalogue, String annee)
         {
-            List<Projet> projets = Projet.AllProjects;
+            Projet[] projets = catalogue.Projets;
             List<Projet> projetsAnnee = new List<Projet>();
 
             // Pour chaque projet
@@ -64,19 +64,19 @@ namespace Program.Classes
          * @param promotion La promotion concernée par la recherche
          * @return La liste des projets pour cette promotion
          */
-        public static List<Projet> RechercheParPromotion(String promotion)
+        public static List<Projet> RechercheParPromotion(Catalogue catalogue, String promotion)
         {
-            List<Projet> projets = Projet.AllProjects;
+            Projet[] projets = catalogue.Projets;
             List<Projet> projetsPromotion = new List<Projet>();
 
             // Pour chaque projet
             foreach (var projet in projets) 
             {
-                // Pour chaque élèves associés à ce projet
-                foreach (var eleve in projet.Eleves)
+                // Pour chaque promo associés à ce projet
+                foreach (var promo in projet.Promotions)
                 {
                     // Si la promotion de l'élève correspond à la promotion entrée
-                    if (eleve.Promotion.ToLower().Equals(promotion.ToLower()))
+                    if (promo.ToLower().Equals(promotion.ToLower()))
                     {
                         projetsPromotion.Add(projet);
                     }
@@ -91,9 +91,9 @@ namespace Program.Classes
          * @param Le mot clé concerné par la recherche
          * @return La liste des projets correspondant à ce mot clé
          */
-        public static List<Projet> RechercheParMotClefs(String motClef)
+        public static List<Projet> RechercheParMotsClefs(Catalogue catalogue, String motClef)
         {
-            List<Projet> projets = Projet.AllProjects;
+            Projet[] projets = catalogue.Projets;
             List<Projet> projetsMotClefs = new List<Projet>();
 
             // Pour chaque projet
@@ -118,9 +118,9 @@ namespace Program.Classes
          * @param intitule L'intitulé cncerné par la recherche
          * @return La liste des projets ayant cet intitulé
          */
-        public static List<Projet> RechercheParIntitule(String intitule)
+        public static List<Projet> RechercheParIntitule(Catalogue catalogue, String intitule)
         {
-            List<Projet> projets = Projet.AllProjects;
+            Projet[] projets = catalogue.Projets;
             List<Projet> projetsIntitule = new List<Projet>();
 
             // Pour tous les projets
@@ -146,7 +146,7 @@ namespace Program.Classes
          * @param recherche La chaîne de caractère à rechercher
          * @return La liste de tous les projets qui correspondent à cette chaîne
          */
-        static List<Projet> RechercheGenerale(String recherche)
+        public static List<Projet> RechercheGenerale(Catalogue catalogue, String recherche)
         {
             List<Projet> projetsEleve = new List<Projet>();
             List<Projet> projetsAnnee = new List<Projet>();
@@ -157,11 +157,11 @@ namespace Program.Classes
             List<Projet> projets = new List<Projet>();
 
             // On recherche par tous les critères possibles avec la chaîne entrée
-            projetsEleve = RechercheParEleve(recherche);
-            projetsAnnee = RechercheParAnnee(recherche);
-            projetsPromotion = RechercheParPromotion(recherche);
-            projetsMotsclef = RechercheParPromotion(recherche);
-            projetsIntitule = RechercheParIntitule(recherche);
+            projetsEleve = RechercheParEleve(catalogue, recherche);
+            projetsAnnee = RechercheParAnnee(catalogue, recherche);
+            projetsPromotion = RechercheParPromotion(catalogue, recherche);
+            projetsMotsclef = RechercheParMotsClefs(catalogue, recherche);
+            projetsIntitule = RechercheParIntitule(catalogue, recherche);
 
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par élève
             foreach (var projet in projetsEleve)
