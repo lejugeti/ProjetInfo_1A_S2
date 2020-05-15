@@ -160,6 +160,9 @@ namespace Program
             }
         }
 
+        /*
+         * Permet de créer un intervenant en indiquant directement son rôle
+         */
         public static Intervenant CreateIntervenant(Role role)
         {
             /*Console.WriteLine("============ Création d'un intervenant (Enseignant, Externe ou Elève ============");*/
@@ -212,8 +215,6 @@ namespace Program
             }
         }
 
-
-
         public virtual void PrintInfos()
         {
             Console.WriteLine("==== Intervenant ====");
@@ -229,6 +230,7 @@ namespace Program
             }
             Console.WriteLine("");
         }
+
         public virtual void PrintInfos(string role)
         {
             Escapes escapes = new Escapes(new String(' ', role.Length + 1));

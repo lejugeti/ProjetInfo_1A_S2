@@ -148,43 +148,20 @@ namespace Program
                 }
             }
                         
-            string[] AjoutPromotion()
+            string[] AjoutPromotion(Eleve[] eleves)
             {
-                Console.WriteLine("\nQuelles promotions étaient impliquées dans ce Projet ? (rentrez les années unes à unes)");
+                
                 List<string> promotions = new List<string>();
-                bool done = false;
-                while (!done)
+                
+                foreach(Eleve e in eleves)
                 {
-                    if(promotions.Count==0) Console.Write("Entrez une année : ");
-                    else Console.Write("Entrez une année ou tapez Y pour quitter : ");
-
-                    string input = Console.ReadLine();
-
-                    string pattern = "^20[0-9]{2}$";
-                    Regex regAnnee = new Regex(pattern);
-                    bool success = regAnnee.Match(input).Success;
-
-                    if (success)
+                    if(!promotions.Contains(e.Promotion))
                     {
-                        promotions.Add(input);
-                    }
-                    else if (input.ToUpper() == "Y" && promotions.Count > 0)
-                    {
-                        done = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Ce que vous avez rentré n'est pas une année, recommencez.");
+                        promotions.Add(e.Promotion);
                     }
                 }
 
-                string[] tabPromotions = new string[promotions.Count];
-                for(int i = 0; i < promotions.Count; i++)
-                {
-                    tabPromotions[i] = promotions[i];
-                }
-
-                return tabPromotions;
+                return promotions.ToArray();
             }
 
             string AjoutSujet()
@@ -372,8 +349,7 @@ namespace Program
 
             string intitule = AjoutIntitule();
             string type = AjoutTypeProjet();
-            int nbEleves = AjoutNbEleves(false);
-            string[] promotions = AjoutPromotion();
+            /*string[] promotions = AjoutPromotion();*/
             string sujetProjet = AjoutSujet();
             string[] motsCles = AjoutMotsCles();
             Intervenant client = AjoutClient();
@@ -381,9 +357,11 @@ namespace Program
             Intervenant[] encadrants = AjoutEncadrant();
             Intervenant[] reviewers = AjoutReviewers();
             Eleve[] eleves = AjoutEleves();
+            int nbEleves = eleves.Length;
+            string[] promotions = AjoutPromotion(eleves);
             Date dateDebut = AjoutDate(true, false);
             Date dateFin = AjoutDate(false, false);
-
+            
             return new Projet(intitule, type, nbEleves, promotions, sujetProjet, motsCles, client, livrables, encadrants, reviewers, eleves, dateDebut, dateFin);
         }
 
@@ -397,7 +375,7 @@ namespace Program
                 }
                 else if (infos.Length > 1)
                 {
-                    Escapes escapes = new Escapes(new String(' ', nomInfo.Length + 1));
+                    Escapes escapes = new Escapes(new String(' ', nomInfo.Length));
 
                     Console.WriteLine($"{nomInfo} |{infos[0]}");
                     for (int i = 1; i < infos.Length; i++)
@@ -411,6 +389,7 @@ namespace Program
                     Console.WriteLine($"{nomInfo} : Aucune donnée rentrée");
                 }
             }
+
             void AfficherListeLivrables(Livrable[] livrables)
             {
                 Escapes escapes = new Escapes("Livrable 1");
@@ -438,6 +417,18 @@ namespace Program
                 Console.WriteLine("");
             }
 
+            void AfficherIntervenant(Intervenant intervenant, string typeIntervenant)
+            {
+                Console.WriteLine($"\n===== {typeIntervenant} =====");
+
+                Escapes escapes = new Escapes();
+                
+                string labelEncadrant = $"{typeIntervenant}";
+                intervenant.PrintInfosCol(escapes, labelEncadrant);
+                Console.WriteLine("");
+            }
+
+            //Exécution
             Console.WriteLine("====== PROJET ======");
             Console.WriteLine($"Intitulé : {Intitule}");
             Console.WriteLine($"Type : {Type}");
@@ -447,6 +438,7 @@ namespace Program
             AfficherListeInfos("Mots clés", MotsCles);
             DateDebut.PrintCol("de début");
             DateFin.PrintCol("de fin");
+            AfficherIntervenant(Client, "Client");
             AfficherListeLivrables(Livrables);
             AfficherListeIntervenants(Encadrants, "Encadrants");
             AfficherListeIntervenants(Reviewers, "Reviewers");
