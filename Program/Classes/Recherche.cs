@@ -9,14 +9,14 @@ namespace Program
     {
         //Méthodes
         
-        /**
+        /*
          * Recherche par élève
          * @param nomEleve Le nom de famille de l'élève concerné par la recherche
          * @return La liste des projets associés à cet élève
          */
-        public static List<Projet> RechercheParEleve(Catalogue catalogue, String nomEleve)
+        public static List<Projet> RechercheParEleve(String nomEleve)
         {
-            Projet[] projets = catalogue.Projets;
+            Projet[] projets = Catalogue.Projets;
             List<Projet> projetsEleve = new List<Projet>();
             
             // Pour chaque projet
@@ -36,14 +36,14 @@ namespace Program
             return projetsEleve;
         }
 
-        /**
+        /*
          * Recherche par année
          * @param L'année concernée par la recherche
          * @return La liste des projets de cette année
          */
-        public static List<Projet> RechercheParAnnee(Catalogue catalogue, String annee)
+        public static List<Projet> RechercheParAnnee(String annee)
         {
-            Projet[] projets = catalogue.Projets;
+            Projet[] projets = Catalogue.Projets;
             List<Projet> projetsAnnee = new List<Projet>();
 
             // Pour chaque projet
@@ -59,14 +59,14 @@ namespace Program
             return projetsAnnee;
         }
 
-        /**
+        /*
          * Recherche par promotion
          * @param promotion La promotion concernée par la recherche
          * @return La liste des projets pour cette promotion
          */
-        public static List<Projet> RechercheParPromotion(Catalogue catalogue, String promotion)
+        public static List<Projet> RechercheParPromotion(String promotion)
         {
-            Projet[] projets = catalogue.Projets;
+            Projet[] projets = Catalogue.Projets;
             List<Projet> projetsPromotion = new List<Projet>();
 
             // Pour chaque projet
@@ -86,14 +86,14 @@ namespace Program
             return projetsPromotion;
         }
 
-        /**
+        /*
          * Recherche par mot clé
          * @param Le mot clé concerné par la recherche
          * @return La liste des projets correspondant à ce mot clé
          */
-        public static List<Projet> RechercheParMotsClefs(Catalogue catalogue, String motClef)
+        public static List<Projet> RechercheParMotsClefs(String motClef)
         {
-            Projet[] projets = catalogue.Projets;
+            Projet[] projets = Catalogue.Projets;
             List<Projet> projetsMotClefs = new List<Projet>();
 
             // Pour chaque projet
@@ -113,14 +113,14 @@ namespace Program
             return projetsMotClefs;
         }
 
-        /**
+        /*
          * Recherche par intitulé
          * @param intitule L'intitulé cncerné par la recherche
          * @return La liste des projets ayant cet intitulé
          */
-        public static List<Projet> RechercheParIntitule(Catalogue catalogue, String intitule)
+        public static List<Projet> RechercheParIntitule(String intitule)
         {
-            Projet[] projets = catalogue.Projets;
+            Projet[] projets = Catalogue.Projets;
             List<Projet> projetsIntitule = new List<Projet>();
 
             // Pour tous les projets
@@ -136,7 +136,7 @@ namespace Program
             return projetsIntitule;
         }
 
-        /**
+        /*
          * Recherche générale, la fonction cherche le String entré parmi :
          *     - les noms des élèves
          *     - les années
@@ -146,22 +146,22 @@ namespace Program
          * @param recherche La chaîne de caractère à rechercher
          * @return La liste de tous les projets qui correspondent à cette chaîne
          */
-        public static List<Projet> RechercheGenerale(Catalogue catalogue, String recherche)
+        public static List<Projet> RechercheGenerale(String recherche)
         {
-            List<Projet> projetsEleve = new List<Projet>();
-            List<Projet> projetsAnnee = new List<Projet>();
-            List<Projet> projetsPromotion = new List<Projet>();
-            List<Projet> projetsMotsclef = new List<Projet>();
-            List<Projet> projetsIntitule = new List<Projet>();
+            List<Projet> projetsEleve;
+            List<Projet> projetsAnnee;
+            List<Projet> projetsPromotion;
+            List<Projet> projetsMotsclef;
+            List<Projet> projetsIntitule;
 
             List<Projet> projets = new List<Projet>();
 
             // On recherche par tous les critères possibles avec la chaîne entrée
-            projetsEleve = RechercheParEleve(catalogue, recherche);
-            projetsAnnee = RechercheParAnnee(catalogue, recherche);
-            projetsPromotion = RechercheParPromotion(catalogue, recherche);
-            projetsMotsclef = RechercheParMotsClefs(catalogue, recherche);
-            projetsIntitule = RechercheParIntitule(catalogue, recherche);
+            projetsEleve = RechercheParEleve(recherche);
+            projetsAnnee = RechercheParAnnee(recherche);
+            projetsPromotion = RechercheParPromotion(recherche);
+            projetsMotsclef = RechercheParMotsClefs(recherche);
+            projetsIntitule = RechercheParIntitule(recherche);
 
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par élève
             foreach (var projet in projetsEleve)
@@ -194,17 +194,6 @@ namespace Program
             }
 
             return projets;
-        }
-
-        static void SortByIntitule(List<Projet> projets)
-        {
-            projets.OrderBy(projet => projet.Intitule);
-        }
-
-        static void SortByDate(List<Projet> projets)
-        {
-            projets.OrderBy(projet => projet.DateFin);
-        }
-        
+        }      
     }
 }

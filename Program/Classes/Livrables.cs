@@ -57,7 +57,7 @@ namespace Program
         public static Livrable CreateLivrable()
         {
             
-            Console.WriteLine("\nVeuillez rentrer les informations relatives aux livrables");
+            Console.WriteLine("\nVeuillez rentrer les informations relatives au nouveau livrable");
             Console.Write("Le type de votre livrable : ");
             string type = Console.ReadLine();
 
