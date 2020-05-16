@@ -4,3 +4,9 @@ C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\changementTypeSolution
 C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\changementTypeSolution\changementTypeSolution\bin\Debug\changementTypeSolution.pdb
 C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\changementTypeSolution\changementTypeSolution\obj\Debug\changementTypeSolution.exe
 C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\changementTypeSolution\changementTypeSolution\obj\Debug\changementTypeSolution.pdb
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfo_1A_S2\bin\Debug\changementTypeSolution.exe.config
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfo_1A_S2\bin\Debug\changementTypeSolution.exe
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfo_1A_S2\bin\Debug\changementTypeSolution.pdb
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfo_1A_S2\obj\Debug\changementTypeSolution.csprojAssemblyReference.cache
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfo_1A_S2\obj\Debug\changementTypeSolution.exe
+C:\Users\Antoine\Documents\Visual Studio 2019\my_projects\ProjetInfo_1A_S2\obj\Debug\changementTypeSolution.pdb
