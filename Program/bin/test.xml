@@ -2,7 +2,7 @@
 <ArrayOfProjet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Projet>
     <Id>2</Id>
-    <Intitule>null sa mère</Intitule>
+    <Intitule>1</Intitule>
     <Type>1</Type>
     <NbEleves>1</NbEleves>
     <Promotions>

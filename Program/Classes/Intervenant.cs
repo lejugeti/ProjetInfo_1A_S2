@@ -52,8 +52,7 @@ namespace Program
         //Méthodes
         public static Intervenant CreateIntervenant()
         {
-            /*Console.WriteLine("============ Création d'un intervenant (Enseignant, Externe ou Elève ============");*/
-            Console.Write("Le nom de la personne : ");
+            Console.Write("\nLe nom de la personne : ");
             string nom = Console.ReadLine();
             Console.Write("Son Prénom : ");
             string prenom = Console.ReadLine();
@@ -81,7 +80,7 @@ namespace Program
             while (!doneSpec);
 
             //Création des rôles de l'intervenant
-            Console.WriteLine("Vous allez maintenant rentrer le ou les rôles de cette personne.");
+            Console.WriteLine("\nVous allez maintenant rentrer le ou les rôles de cette personne.");
             List<Role> roles = new List<Role>();
 
             bool doneRole = false;
@@ -120,13 +119,13 @@ namespace Program
          */
         public static Intervenant CreateIntervenant(string type)
         {
-            Console.Write("Le nom de la personne : ");
+            Console.Write("\nLe nom de la personne : ");
             string nom = Console.ReadLine();
             Console.Write("Son Prénom : ");
             string prenom = Console.ReadLine();
 
             //Création des rôles de l'intervenant
-            Console.WriteLine("Vous allez maintenant rentrer le ou les rôles de cette personne.");
+            Console.WriteLine("\nVous allez maintenant rentrer le ou les rôles de cette personne.");
             List<Role> roles = new List<Role>();
 
             bool doneRole = false;
@@ -165,8 +164,7 @@ namespace Program
          */
         public static Intervenant CreateIntervenant(Role role)
         {
-            /*Console.WriteLine("============ Création d'un intervenant (Enseignant, Externe ou Elève ============");*/
-            Console.Write("Le nom de la personne : ");
+            Console.Write("\nLe nom de la personne : ");
             string nom = Console.ReadLine();
             Console.Write("Son Prénom : ");
             string prenom = Console.ReadLine();
@@ -252,7 +250,8 @@ namespace Program
         
         public virtual void PrintInfosCol(Escapes escapes, string nomInfo)
         {
-            escapes.Add(nomInfo);
+            
+            escapes.Add(nomInfo); //On ajoute l'ensemble des espaces pour aligner les infos
             Console.Write(nomInfo);
 
             //Permet d'afficher les infos de l'individu 
@@ -270,6 +269,7 @@ namespace Program
             }
             Console.WriteLine("");
 
+            //Suppression des espaces car on va passer à un autre intervenant
             escapes.Spaces.RemoveAt(escapes.Spaces.Count - 1);
         }
     }
@@ -307,7 +307,6 @@ namespace Program
         public static Enseignant CreateEnseignant(string nom, string prenom, Role[] roles)
         {
             //Laboratoire
-            Console.Write("Quel est Le nom du laboratoire de l'enseignant ?");
             Console.Write("Rentrez le nom du laboratoire ou Y si il n'en possède pas : ");
             string labInput = Console.ReadLine();
 
@@ -520,7 +519,7 @@ namespace Program
             string promoInput;
             do
             {
-                Console.Write("Rentrez la promotion de l'élève (ex : 2020) : ");
+                Console.Write("\nRentrez la promotion de l'élève (ex : 2020) : ");
                 promoInput = Console.ReadLine();
                 if (Projet.Date.IsPromotion(promoInput))
                 {
@@ -537,7 +536,7 @@ namespace Program
             string anneeInput;
             do
             {
-                Console.WriteLine("En quelle année était l'élève ?");
+                Console.WriteLine("\nEn quelle année était l'élève ?");
                 Console.WriteLine("1A : 1,   2A : 2,   3A : 3");
                 Regex regAnnee = new Regex("^[1-3]$");
                 anneeInput = Console.ReadLine();

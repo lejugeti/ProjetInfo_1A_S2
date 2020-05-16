@@ -56,9 +56,11 @@ namespace Program
          */
         protected static void RunMenu()
         {
+            Catalogue catalogue = new Catalogue();
+
             Console.Clear();
             Console.WriteLine("========= Logiciel de consultation des projets de l'ENSC =========\n");
-            AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Consulter l'ensemble des projets", "ajouter un projet", "Quitter" });
+            AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Consulter l'ensemble des projets", "Ajouter un projet", "Quitter" });
 
             bool doneRep = false;
             bool error = false;
@@ -75,10 +77,10 @@ namespace Program
                 {
                     ConsulterProjets();
                     doneRep = true;
-                }              
+                }
                 else if (rep == "2")
                 {
-                    AjouterProjet(new Catalogue());
+                    AjouterProjet(false);
                     doneRep = true;
                 }
                 else if (rep == "3")
@@ -99,109 +101,161 @@ namespace Program
          */
         protected static void ConsulterProjets()
         {
-            Catalogue catalogue = new Catalogue();
-
+            // Boucle ne se terminant que si l'utilisateur décide de quitter le programme
             bool doneConsulter = false;
             while (!doneConsulter)
             {
                 Console.Clear();
-                catalogue.PrintCatalogue();
-                AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Consulter un projet particulier", "Chercher un projet", "Ajouter un projet", "Supprimer un projet", "Quitter" });
+                Catalogue.PrintCatalogue();
 
-                bool doneRep = false;
-                bool error = false;
-                string rep;
-                do
+                // Si le catalogue est vide on restreint les options
+                if (Catalogue.Projets.Length == 0)
                 {
-                    if (error)
-                    {
-                        Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
-                    }
-                    rep = Console.ReadLine();
+                    AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Ajouter un projet", "Quitter" });
 
-                    if (rep == "1")
+                    // boucle while pour demander une réponse valide à l'utilisateur
+                    bool doneRep = false;
+                    bool error = false;
+                    string rep;
+                    do
                     {
-                        ConsulterProjetParticulier(catalogue, false);
-                        doneRep = true;
-                    }
-                    else if (rep == "2")
+                        if (error)
+                        {
+                            Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
+                        }
+                        rep = Console.ReadLine();
+
+                        if (rep == "1")
+                        {
+                            AjouterProjet(false);
+                            doneRep = true;
+                        }
+                        else if (rep == "2")
+                        {
+                            doneRep = true;
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            error = true;
+                        }
+                    } while (!doneRep);
+                }
+
+                // Si le Catalogue n'est pas vide
+                else
+                {
+                    AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Consulter un projet particulier", "Chercher un projet", "Ajouter un projet", "Supprimer un projet", "Quitter" });
+
+                    // boucle while pour demander une réponse valide à l'utilisateur
+                    bool doneRep = false;
+                    bool error = false;
+                    do
                     {
-                        ChercherProjet(catalogue);
-                        doneRep = true;
-                    }
-                    else if (rep == "3")
-                    {
-                        AjouterProjet(catalogue);
-                        doneRep = true;
-                    }
-                    else if (rep == "4")
-                    {
-                        SupprimerProjet(catalogue, false);
-                        doneRep = true;
-                    }
-                    else if (rep == "5")
-                    {
-                        doneRep = true;
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        error = true;
-                    }
-                } while (!doneRep);
+                        if (error)
+                        {
+                            Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
+                        }
+                        int rep = TryParseReponse(Console.ReadLine());
+
+                        if (rep == 1)
+                        {
+                            ConsulterProjetParticulier(false);
+                            doneRep = true;
+                        }
+                        else if (rep == 2)
+                        {
+                            ChercherProjet();
+                            doneRep = true;
+                        }
+                        else if (rep == 3)
+                        {
+                            AjouterProjet(false);
+                            doneRep = true;
+                        }
+                        else if (rep == 4)
+                        {
+                            SupprimerProjet(false);
+                            doneRep = true;
+                        }
+                        else if (rep == 5)
+                        {
+                            doneRep = true;
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            error = true;
+                        }
+                    } while (!doneRep);
+                }
             }
-
         }
 
         /*
          * Permet à l'utilisateur de consulter un projet précis en lui demandant lequel il veut voir.
          * Si la réponse n'est pas valide, la fonction est utilisée à nouveau.
+         * Cette fonction n'est utilisée que s'il y a une affichage global du catalogue, pas lorsqu'il y a une recherche.
          * @arg catalogue, le Catalogue contenant tous les projets
          * @arg error, indique si le numéro de projet saisi est valide ou pas. 
          */
-        protected static void ConsulterProjetParticulier(Catalogue catalogue, bool error)
+        protected static void ConsulterProjetParticulier(bool error)
         {
 
             if (error) Console.WriteLine("Ce que vous avez saisi est incorrect. Recommencez.\n");
             Console.Write("Saisissez le numéro du projet à consulter : ");
 
+
             string rep = Console.ReadLine();
-            int repInt = Int32.Parse(rep);
-            if (repInt > catalogue.Projets.Length || repInt <= 0)
+            int repAffichage = TryParseReponse(rep); // le numéro du projet que l'utilisateur veut consulter
+            
+            if (repAffichage > Catalogue.Projets.Length || repAffichage <= 0)
             {
-                ConsulterProjetParticulier(catalogue, true);
+                ConsulterProjetParticulier(true);
             }
 
             else
             {
-                catalogue.Projets[repInt - 1].PrintInfos();
-
-                AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Revenir au menu précédent", "Supprimer ce projet" });
-                bool doneRep = false;
-                bool errorChoix = false;
-                string repChoix;
+                bool doneProjetParticulier = false;
+                bool errorProjetParticulier = false;
+                string repProjetParticulier;
                 do
                 {
-                    if (errorChoix)
+                    Console.Clear();
+
+                    Catalogue.Projets[repAffichage - 1].PrintInfos();
+                    AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Revenir au menu précédent", "Modifier ce projet", "Supprimer ce projet" });
+
+                    if (errorProjetParticulier)
                     {
                         Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
                     }
-                    repChoix = Console.ReadLine();
+                    repProjetParticulier = Console.ReadLine();
 
-                    if (repChoix == "1")
+                    //Revenir au menu précédent
+                    if (repProjetParticulier == "1")
                     {
-                        doneRep = true;
+                        doneProjetParticulier = true;
                     }
-                    else if (repChoix == "2")
+
+                    // Modifier le projet
+                    else if (repProjetParticulier == "2")
                     {
-                        catalogue.RemoveProjet(repInt - 1);
-                        doneRep = true;
+                        ChangerProjet(Catalogue.Projets[repAffichage - 1]);
+                    }
+
+                    // Supprimer le projet
+                    else if (repProjetParticulier == "3")
+                    {
+                        int removeId = Catalogue.Projets[repAffichage - 1].Id;
+                        Catalogue.RemoveProjet(removeId);
+                        doneProjetParticulier = true;
                     }
                     else
                     {
-                        errorChoix = true;
+                        errorProjetParticulier = true;
                     }
-                } while (!doneRep);
+                } while (!doneProjetParticulier);
             }
         }
 
@@ -214,67 +268,79 @@ namespace Program
         protected static void ConsulterProjetParticulier(List<Projet> projets, bool error)
         {
 
-            if (error) Console.WriteLine("Ce que vous avez saisi est incorrect. Recommencez.\n");
+            if (error) Console.WriteLine("\nCe que vous avez saisi est incorrect. Recommencez.\n");
             Console.Write("Saisissez le numéro du projet à consulter : ");
 
             string rep = Console.ReadLine();
-            int repInt = Int32.Parse(rep);
-            
-            if (repInt > projets.Count || repInt <= 0)
+            int repAffichage = TryParseReponse(rep);
+
+            if (repAffichage > projets.Count || repAffichage <= 0)
             {
                 ConsulterProjetParticulier(projets, true);
             }
 
             else
             {
-                projets[repInt - 1].PrintInfos();
-
-                AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Revenir au menu précédent", "Supprimer ce projet" });
-                bool doneRep = false;
-                bool errorChoix = false;
-                string repChoix;
+                bool doneProjetParticulier = false;
+                bool errorProjetParticulier = false;
+                string repProjetParticulier;
                 do
                 {
-                    if (errorChoix)
+                    projets[repAffichage - 1].PrintInfos();
+                    AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Revenir au menu précédent", "Modifier ce projet", "Supprimer ce projet" });
+
+                    if (errorProjetParticulier)
                     {
                         Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
                     }
-                    repChoix = Console.ReadLine();
+                    repProjetParticulier = Console.ReadLine();
 
-                    if (repChoix == "1")
+                    //Revenir au menu précédent
+                    if (repProjetParticulier == "1")
                     {
-                        doneRep = true;
+                        doneProjetParticulier = true;
                     }
-                    else if (repChoix == "2")
+
+                    // Modifier le projet
+                    else if (repProjetParticulier == "2")
                     {
-                        /*catalogue.RemoveProjet(repInt - 1);*/
-                        doneRep = true;
+                        ChangerProjet(projets[repAffichage - 1]);
                     }
+
+                    // Supprimer le projet
+                    else if (repProjetParticulier == "3")
+                    {
+                        int removeId = projets[repAffichage - 1].Id;
+                        Catalogue.RemoveProjet(removeId - 1);
+                        doneProjetParticulier = true;
+                    }
+
                     else
                     {
-                        errorChoix = true;
+                        errorProjetParticulier = true;
                     }
-                } while (!doneRep);
+                } while (!doneProjetParticulier);
             }
         }
-        
+
         /*
          * Interface de recherche de projet selon des méthodes de recherche différentes.
          * Si le choix de recherche n'est pas valide, la fonction est utilisée à nouveau.
+         * Cette interface englobe toutes les possibilités de recherche.
          * @arg catalogue, le Catalogue contenant tous les projets
          * @arg error, indique si le numéro de projet saisi est valide ou pas. 
          */
-        protected static void ChercherProjet(Catalogue catalogue)
+        protected static void ChercherProjet()
         {
             bool error = false;
             bool doneRecherches = false;
 
             //Tant que l'utilisateur veut faire des recherches
-            while(!doneRecherches)
+            while (!doneRecherches)
             {
                 Console.Clear();
                 Console.WriteLine("======= Recherche de Projet =======");
-                
+
                 if (error) Console.WriteLine("\n Ce que vous avez rentré est incorrect, recommencez.");
                 AfficherGrilleChoix("Quel type de recherche souhaitez-vous faire ?", new string[] { "Recherche générale", "Par nom d'élève", "Par année de réalisation", "Par promotion", "Par mots clés", "Revenir au menu précédent" });
 
@@ -283,35 +349,40 @@ namespace Program
 
                 if (rep == "1")
                 {
-                    EffectuerRecherchePrecise(catalogue, "Générale");
+                    EffectuerRecherchePrecise("Générale");
+                    error = false;
                 }
                 else if (rep == "2")
                 {
-                    EffectuerRecherchePrecise(catalogue, "Par Elève");
+                    EffectuerRecherchePrecise("Par Elève");
+                    error = false;
                 }
                 else if (rep == "3")
                 {
-                    EffectuerRecherchePrecise(catalogue, "Par année");
+                    EffectuerRecherchePrecise("Par année");
+                    error = false;
                 }
                 else if (rep == "4")
                 {
-                    EffectuerRecherchePrecise(catalogue, "Par Promotion");
+                    EffectuerRecherchePrecise("Par Promotion");
+                    error = false;
                 }
                 else if (rep == "5")
                 {
-                    EffectuerRecherchePrecise(catalogue, "Par mots clés");
+                    EffectuerRecherchePrecise("Par mots clés");
+                    error = false;
                 }
                 else if (rep == "6")
-                {   
+                {
                     //Permet de sortir du module de recherche
                     doneRecherches = true;
                 }
                 else
                 {
+                    // Si la réponse est invalide
                     error = true;
                 }
             }
-            
         }
 
         /*
@@ -320,41 +391,40 @@ namespace Program
          * @arg catalogue, le Catalogue contenant tous les projets
          * @arg type, le type de recherche effectuée 
          */
-        protected static void EffectuerRecherchePrecise(Catalogue catalogue, string type)
+        protected static void EffectuerRecherchePrecise(string type)
         {
             Console.Clear();
             Console.WriteLine($"======= Recherche {type} ======");
-            if(type == "Générale") Console.Write("\nCe type de recherche est général, il renverra tous les projets matchant votre requête.");
+            if (type == "Générale") Console.Write("\nCe type de recherche est général, il renverra tous les projets matchant votre requête.");
             Console.Write("\n\nSaisissez votre recherche : ");
 
-            string rep = Console.ReadLine();
+            string recherche = Console.ReadLine(); // on demande à l'utilisateur sa recherche
 
             List<Projet> resultats = new List<Projet>();
             if (type == "Générale")
             {
-                resultats = Recherche.RechercheGenerale(catalogue, rep);
+                resultats = Recherche.RechercheGenerale(recherche);
             }
             else if (type == "Par Elève")
             {
-                resultats = Recherche.RechercheParEleve(catalogue, rep);
+                resultats = Recherche.RechercheParEleve(recherche);
             }
             else if (type == "Par année")
             {
-                resultats = Recherche.RechercheParAnnee(catalogue, rep);
+                resultats = Recherche.RechercheParAnnee(recherche);
             }
             else if (type == "Par Promotion")
             {
-                resultats = Recherche.RechercheParPromotion(catalogue, rep);
+                resultats = Recherche.RechercheParPromotion(recherche);
             }
             else if (type == "Par mots clés")
             {
-                resultats = Recherche.RechercheParMotsClefs(catalogue, rep);
+                resultats = Recherche.RechercheParMotsClefs(recherche);
             }
 
             //Affichage des projets trouvés et consultation des projets
             bool doneRep;
-            
-            if (resultats.Count > 0)  //Si la recherche trouve des résultats elle est effectuée
+            if (resultats.Count > 0)  //Si la recherche trouve des résultats ils sont alors affichés
             {
                 doneRep = false;
             }
@@ -365,6 +435,7 @@ namespace Program
                 doneRep = true;
             }
 
+            // Tant que l'utilisateur n'a pas fini de consulter les projets obtenus via la recherche
             bool errorChoix = false;
             string repChoix;
             while (!doneRep)
@@ -374,7 +445,7 @@ namespace Program
                 AfficherListeProjets(resultats);
 
                 AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Consulter un projet particulier", "Effectuer une autre recherche" });
-                
+
                 if (errorChoix)
                 {
                     Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
@@ -384,7 +455,8 @@ namespace Program
 
                 if (repChoix == "1")
                 {
-                    ConsulterProjetParticulier(resultats, false);                 
+                    ConsulterProjetParticulier(resultats, false);
+                    errorChoix = false;
                 }
                 else if (repChoix == "2")
                 {
@@ -400,71 +472,123 @@ namespace Program
         /*
          * Instance de création de projet. Permet à l'utilisateur de créer un projet.
          */
-        protected static void AjouterProjet(Catalogue catalogue)
+        protected static void AjouterProjet(bool error)
         {
             Console.Clear();
-            Console.WriteLine("Vous avez décidé d'ajouter un projet. Rentrez à présent l'ensemble des informations nécessaires.\n");
+            Console.Write("Vous avez décidé d'ajouter un projet. Voulez-vous continuer ? \nVotre réponse (O/N) : ");
 
-            catalogue.AddProjet(Projet.CreateProjet());
-            Console.WriteLine("\nL'ajout du projet est réussie. Appuyez sur une touche pour continuer.");
-            Console.ReadKey();
+            if (error) Console.WriteLine("Ce que vous avez saisi est incorrect, recommencez");
+            string confirmation = Console.ReadLine();
+
+            if (confirmation.ToUpper() == "O")
+            {
+                Catalogue.AddProjet(Projet.CreateProjet());
+                Console.WriteLine("\nL'ajout du projet est réussie. Appuyez sur une touche pour continuer.");
+                Console.ReadKey();
+            }
+            else if (confirmation.ToUpper() == "N")
+            {
+                Console.WriteLine("Ajout de projet annulée. Appuyez sur n'importe quelle touche pour continuer.");
+                Console.ReadKey();
+            }
+            else AjouterProjet(true);
         }
 
         /*
          * Instance de suppression de projet. Permet à l'utilisateur de choisir quel projet il veut supprimer.
+         * Cette fonction est appelée lorsque l'utilisateur consulter l'ensemble des projets et pas un projet
+         * particulier.
          * Le projet est supprimé de l'arborescence XML supportant le programme.
          * @arg catalogue, le Catalogue contenant tous les projets
          * @arg error, indique si le numéro de projet saisi est valide ou pas. On part du principe qu'il n'y a pas d'erreur pour le premier appel.
          */
-        protected static void SupprimerProjet(Catalogue catalogue, bool error)
+        protected static void SupprimerProjet(bool error)
         {
-            if (error) Console.WriteLine("Ce que vous avez saisi est incorrect. Recommencez.\n");
-            Console.Write("Saisissez le numéro du projet à supprimer : ");
+            if (error) Console.WriteLine("\nCe que vous avez saisi est incorrect. Recommencez.\n");
+            Console.Write("Saisissez le numéro du projet à supprimer (Y pour quitter) : ");
 
             string rep = Console.ReadLine();
-            int repInt = Int32.Parse(rep);
-            if (repInt > catalogue.Projets.Length || repInt <= 0)
-            {
-                ConsulterProjetParticulier(catalogue, true);
-            }
+            int repInt = TryParseReponse(rep);
 
+            if (rep.ToUpper() == "Y")
+            {
+                // Permet de sortir de la fonction si l'utilisateur ne veut pas supprimer de projet en fait
+            }
+            else if (repInt > Catalogue.Projets.Length || repInt <= 0)
+            {
+                SupprimerProjet(true);
+            }
             else
             {
-                catalogue.RemoveProjet(repInt - 1);
+                int removeId = Catalogue.Projets[repInt - 1].Id;
+                Catalogue.RemoveProjet(removeId);
             }
         }
 
-        
+        /*
+         * Interface de changement de projet. Permet à l'utilisateur d'effectuer des modifications
+         * sur un projet déjà existant.
+         * @arg idProjet, l'Id du projet à mettre à jour
+         */
+        protected static void ChangerProjet(Projet projetToChange)
+        {
+            int indexProjet = Catalogue.FindProjet(projetToChange.Id);
+
+            bool doneMaj = false;
+            bool errorMaj = false;
+            while (!doneMaj)
+            {
+                Console.Clear();
+
+                projetToChange.PrintInfos();
+
+                Console.WriteLine("\n====== Mise à jour d'un projet ======\n");
+                AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Changer l'intitulé", "Changer le type", "Modifier le Client", "Ajouter un livrable", "Modifier un livrable", "Ajouter un encadrant", "Modifier un encadrant", "Ajouter un reviewer", "Modifier un reviewer", "Ajouter un élève", "Modifier un élève", "Modifier la date de début", "Modifier la date de fin", "Revenir au menu précédent" });
+
+                if (errorMaj) Console.WriteLine("Ce que vous avez saisi est incorrect, recommencez.");
+                Console.Write("Votre réponse : ");
+                int reponse = TryParseReponse(Console.ReadLine());
+
+                if (reponse <= 0 || reponse > 14)
+                {
+                    errorMaj = true;
+                }
+                else if (reponse == 14)
+                {
+                    doneMaj = true;
+                }
+                else
+                {
+                    errorMaj = false;
+                    projetToChange.MiseAJour(reponse);
+                }
+            }
+
+            Catalogue.Projets[indexProjet] = projetToChange;
+            Catalogue.Save();
+        }
+
+        /*
+         * Tente de parse la réponse de l'utilisateur. Si le Parse réussit la fonction renvoie la réponse
+         * sous forme de int, -1 si le parse échoue.
+         * @arg rep, la réponse de l'utilisateur obtenue après un Console.ReadLine();
+         */
+        public static int TryParseReponse(string rep)
+        {
+            try
+            {
+                int parsed = Int32.Parse(rep);
+                return parsed;
+            }
+            catch (FormatException)
+            {
+                return -1;
+            }
+        }
 
         static void Main(string[] args)
         {
-            Role role = new Role("tuteur");
-            Matiere matiere = new Matiere("cognition", "666");
-            Projet.Date date = new Projet.Date("20/10/2020");
-            Intervenant encadrant = new Enseignant("lespinet", "véro", new Role[] { role, role }, "ISM", matiere);
-            Livrable livrable = new Livrable("vidéo", date, "ceci est un livrable");
-            Enseignant enseignant = new Enseignant("lespinet", "véro", new Role[] { role, role }, "ISM", matiere);
-            Intervenant[] plusieursIntervenants = new Intervenant[] { encadrant, encadrant };
-            Eleve eleve = new Eleve("Parize", "antoine", new Role[] { role }, "2022", "1A");
-            Projet projet = new Projet("projet de gestion de projets", "info", 1, new string[] { "2022", "2020" }, "bimbamboom", new string[] { "projet" }, encadrant,
-                 new Livrable[] { livrable, livrable }, plusieursIntervenants, new Intervenant[] { encadrant }, new Eleve[] { eleve }, date, date);
-
-            Intervenant test = new Eleve("Parize", "antoine", new Role[] { role }, "2022", "1A");
-            Externe externe = new Externe("Parize", "antoine", new Role[] { role }, "2022");
-
-            Catalogue a = new Catalogue();
-
-
-            //a.PrintCatalogue();
-
-            bool done = false;
-            while (!done)
-            {
-                RunMenu();
-            }
-
-
-            Console.ReadKey();
+            RunMenu();
         }
     }
 }
