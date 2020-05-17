@@ -8,6 +8,8 @@ namespace Program
     public class Catalogue
     {
         public static Projet[] Projets { get; set; }
+        public static int IdMaxProjets { get; set; } // L'ID maximum des projets présents dans le catalogue
+
 
         //Constructeurs
 
@@ -24,7 +26,7 @@ namespace Program
                     Projets = (Projet[])serializer.Deserialize(sr);
                 }
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException) // Si le fichier n'existe pas on le crée
             {
                 Projets = new Projet[0];
 
@@ -34,20 +36,28 @@ namespace Program
                     serializer.Serialize(sw, Projets);
                 }
             }
-        }
 
-        public Catalogue(List<Projet> projets)
-        {
-            Projets = projets.ToArray();
-        }
-
-        public Catalogue(Projet[] projets)
-        {
-            Projets = projets;
+            // on détermine l'id max des projets contenus dans le fichier XML
+            IdMaxProjets = FindIdGlobal();
         }
 
 
         //Méthodes
+
+        /*
+         * Permet d'obtenir l'id global des projets au lancement du programme.
+         * @return idMax, l'ID le plus haut trouvé dans le catalogue de projet
+         */
+        public static int FindIdGlobal()
+        {
+            int idMax = 0;
+            foreach (Projet projet in Catalogue.Projets)
+            {
+                if (projet.Id > idMax) idMax = projet.Id;
+            }
+
+            return idMax;
+        }
 
         /*
          * Cherche dans le catalogue de projet le projet possèdant l'Id passé en argument.
@@ -66,7 +76,7 @@ namespace Program
         }
 
         /*
-         * Sauvegarde le catalogue dans un fichier XML
+         * Sauvegarde le catalogue dans un fichier XML par sérialisation
          */
         public static void Save()
         {
@@ -108,7 +118,7 @@ namespace Program
 
             Projets = tmpProjet.ToArray(); // on met à jour en mémoire la liste de projets de Catalogue
 
-            Save();
+            Save(); // le catalogue est sauvegardé dans le fichier XML
         }
 
         /*
@@ -128,7 +138,7 @@ namespace Program
         }
 
         /*
-         * Imprime dans la console l'ensemble des projets du catalogues en les numérotant de 1 à n.
+         * Affiche dans la console l'ensemble des projets du catalogues en les numérotant de 1 à n.
          */
         public static void PrintCatalogue()
         {

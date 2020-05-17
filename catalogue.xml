@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProjet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Projet>
-    <Id>2</Id>
-    <Intitule>null sa mère</Intitule>
-    <Type>1</Type>
-    <NbEleves>1</NbEleves>
+    <Id>1</Id>
+    <Intitule>Effet de l'attention sur le contrôle d'un bci auditif</Intitule>
+    <Type>transdi</Type>
+    <NbEleves>4</NbEleves>
     <Promotions>
-      <string>2010</string>
+      <string>2022</string>
     </Promotions>
-    <Sujet>1</Sujet>
+    <Sujet>Effet de l'attention sur le contrôle d'un bci auditif</Sujet>
     <MotsCles>
-      <string>y</string>
+      <string>bci</string>
+      <string>attention</string>
+      <string>eeg</string>
     </MotsCles>
     <Client>
-      <_nom>y</_nom>
-      <_prenom>y</_prenom>
+      <_nom>Alvaro</_nom>
+      <_prenom>Alvaro</_prenom>
       <_roles>
         <Role>
           <Nom>client</Nom>
         </Role>
       </_roles>
-      <Nom>y</Nom>
-      <Prenom>y</Prenom>
+      <Nom>Alvaro</Nom>
+      <Prenom>Alvaro</Prenom>
       <Roles>
         <Role>
           <Nom>client</Nom>
@@ -30,27 +32,37 @@
     </Client>
     <Livrables>
       <Livrable>
-        <Type>4</Type>
+        <Type>analyses statistiques</Type>
         <Deadline>
-          <Jour>20</Jour>
-          <Mois>10</Mois>
+          <Jour>30</Jour>
+          <Mois>05</Mois>
           <Annee>2020</Annee>
         </Deadline>
-        <Description>20/10/2020</Description>
+        <Description>Analyses de données objectives et subjectives obtenues lors de passations d'expériences</Description>
+        <LienExterne>Null</LienExterne>
+      </Livrable>
+      <Livrable>
+        <Type>Site web</Type>
+        <Deadline>
+          <Jour>30</Jour>
+          <Mois>05</Mois>
+          <Annee>2020</Annee>
+        </Deadline>
+        <Description>Site web décrivant notre expérience et ses résultats.</Description>
         <LienExterne>Null</LienExterne>
       </Livrable>
     </Livrables>
     <Encadrants>
       <Intervenant>
-        <_nom>n</_nom>
-        <_prenom>n</_prenom>
+        <_nom>Alvaro</_nom>
+        <_prenom>Alvaro</_prenom>
         <_roles>
           <Role>
             <Nom>Encadrant</Nom>
           </Role>
         </_roles>
-        <Nom>n</Nom>
-        <Prenom>n</Prenom>
+        <Nom>Alvaro</Nom>
+        <Prenom>Alvaro</Prenom>
         <Roles>
           <Role>
             <Nom>Encadrant</Nom>
@@ -60,15 +72,15 @@
     </Encadrants>
     <Reviewers>
       <Intervenant>
-        <_nom>n</_nom>
-        <_prenom>n</_prenom>
+        <_nom>Semal</_nom>
+        <_prenom>Catherine</_prenom>
         <_roles>
           <Role>
             <Nom>Reviewer</Nom>
           </Role>
         </_roles>
-        <Nom>n</Nom>
-        <Prenom>n</Prenom>
+        <Nom>Semal</Nom>
+        <Prenom>Catherine</Prenom>
         <Roles>
           <Role>
             <Nom>Reviewer</Nom>
@@ -78,35 +90,258 @@
     </Reviewers>
     <Eleves>
       <Eleve>
-        <_nom>n</_nom>
-        <_prenom>n</_prenom>
+        <_nom>Parize</_nom>
+        <_prenom>Antoine</_prenom>
         <_roles>
           <Role>
-            <Nom>n</Nom>
+            <Nom>chef de projet</Nom>
           </Role>
         </_roles>
-        <Nom>n</Nom>
-        <Prenom>n</Prenom>
+        <Nom>Parize</Nom>
+        <Prenom>Antoine</Prenom>
         <Roles>
           <Role>
-            <Nom>n</Nom>
+            <Nom>chef de projet</Nom>
           </Role>
         </Roles>
-        <_promotion>2010</_promotion>
-        <_annee>3A</_annee>
-        <Promotion>2010</Promotion>
-        <Annee>3A</Annee>
+        <_promotion>2022</_promotion>
+        <_annee>1A</_annee>
+        <Promotion>2022</Promotion>
+        <Annee>1A</Annee>
+      </Eleve>
+      <Eleve>
+        <_nom>Esquirol</_nom>
+        <_prenom>Juliette</_prenom>
+        <_roles>
+          <Role>
+            <Nom>responsable passations</Nom>
+          </Role>
+        </_roles>
+        <Nom>Esquirol</Nom>
+        <Prenom>Juliette</Prenom>
+        <Roles>
+          <Role>
+            <Nom>responsable passations</Nom>
+          </Role>
+        </Roles>
+        <_promotion>2022</_promotion>
+        <_annee>1A</_annee>
+        <Promotion>2022</Promotion>
+        <Annee>1A</Annee>
+      </Eleve>
+      <Eleve>
+        <_nom>Laur</_nom>
+        <_prenom>Simon</_prenom>
+        <_roles>
+          <Role>
+            <Nom>responsable site web</Nom>
+          </Role>
+        </_roles>
+        <Nom>Laur</Nom>
+        <Prenom>Simon</Prenom>
+        <Roles>
+          <Role>
+            <Nom>responsable site web</Nom>
+          </Role>
+        </Roles>
+        <_promotion>2022</_promotion>
+        <_annee>1A</_annee>
+        <Promotion>2022</Promotion>
+        <Annee>1A</Annee>
+      </Eleve>
+      <Eleve>
+        <_nom>Perrier</_nom>
+        <_prenom>Alban</_prenom>
+        <_roles>
+          <Role>
+            <Nom>reponsable site web</Nom>
+          </Role>
+        </_roles>
+        <Nom>Perrier</Nom>
+        <Prenom>Alban</Prenom>
+        <Roles>
+          <Role>
+            <Nom>reponsable site web</Nom>
+          </Role>
+        </Roles>
+        <_promotion>2022</_promotion>
+        <_annee>1A</_annee>
+        <Promotion>2022</Promotion>
+        <Annee>1A</Annee>
       </Eleve>
     </Eleves>
     <DateDebut>
-      <Jour>10</Jour>
+      <Jour>01</Jour>
       <Mois>10</Mois>
-      <Annee>2010</Annee>
+      <Annee>2019</Annee>
     </DateDebut>
     <DateFin>
-      <Jour>20</Jour>
-      <Mois>10</Mois>
-      <Annee>2010</Annee>
+      <Jour>30</Jour>
+      <Mois>05</Mois>
+      <Annee>2020</Annee>
+    </DateFin>
+  </Projet>
+  <Projet>
+    <Id>2</Id>
+    <Intitule>Projet web 1A - QuizzyPeezy</Intitule>
+    <Type>Projet web</Type>
+    <NbEleves>2</NbEleves>
+    <Promotions>
+      <string>2022</string>
+    </Promotions>
+    <Sujet>Site de quiz</Sujet>
+    <MotsCles>
+      <string>web</string>
+      <string>quiz</string>
+      <string>javascript</string>
+      <string>php</string>
+      <string>html</string>
+    </MotsCles>
+    <Client xsi:type="Enseignant">
+      <_nom>Baptiste Pesquet</_nom>
+      <_prenom>Baptiste</_prenom>
+      <_roles>
+        <Role>
+          <Nom>client</Nom>
+        </Role>
+      </_roles>
+      <Nom>Baptiste Pesquet</Nom>
+      <Prenom>Baptiste</Prenom>
+      <Roles>
+        <Role>
+          <Nom>client</Nom>
+        </Role>
+      </Roles>
+      <_laboratoire>Null</_laboratoire>
+      <_matiere>
+        <Nom>Communication Web</Nom>
+        <Code>Null</Code>
+      </_matiere>
+      <Laboratoire>Null</Laboratoire>
+      <Matiere>
+        <Nom>Communication Web</Nom>
+        <Code>Null</Code>
+      </Matiere>
+    </Client>
+    <Livrables>
+      <Livrable>
+        <Type>Site web</Type>
+        <Deadline>
+          <Jour>17</Jour>
+          <Mois>04</Mois>
+          <Annee>2020</Annee>
+        </Deadline>
+        <Description>Site web terminé et fonctionnel</Description>
+        <LienExterne>Null</LienExterne>
+      </Livrable>
+    </Livrables>
+    <Encadrants>
+      <Intervenant xsi:type="Enseignant">
+        <_nom>Pesquet</_nom>
+        <_prenom>Baptiste</_prenom>
+        <_roles>
+          <Role>
+            <Nom>Encadrant</Nom>
+          </Role>
+        </_roles>
+        <Nom>Pesquet</Nom>
+        <Prenom>Baptiste</Prenom>
+        <Roles>
+          <Role>
+            <Nom>Encadrant</Nom>
+          </Role>
+        </Roles>
+        <_laboratoire>Null</_laboratoire>
+        <_matiere>
+          <Nom>Communication web</Nom>
+          <Code>Null</Code>
+        </_matiere>
+        <Laboratoire>Null</Laboratoire>
+        <Matiere>
+          <Nom>Communication web</Nom>
+          <Code>Null</Code>
+        </Matiere>
+      </Intervenant>
+    </Encadrants>
+    <Reviewers>
+      <Intervenant xsi:type="Enseignant">
+        <_nom>Pesquet</_nom>
+        <_prenom>Baptiste</_prenom>
+        <_roles>
+          <Role>
+            <Nom>Reviewer</Nom>
+          </Role>
+        </_roles>
+        <Nom>Pesquet</Nom>
+        <Prenom>Baptiste</Prenom>
+        <Roles>
+          <Role>
+            <Nom>Reviewer</Nom>
+          </Role>
+        </Roles>
+        <_laboratoire>Null</_laboratoire>
+        <_matiere>
+          <Nom>Communication web</Nom>
+          <Code>Null</Code>
+        </_matiere>
+        <Laboratoire>Null</Laboratoire>
+        <Matiere>
+          <Nom>Communication web</Nom>
+          <Code>Null</Code>
+        </Matiere>
+      </Intervenant>
+    </Reviewers>
+    <Eleves>
+      <Eleve>
+        <_nom>Parize</_nom>
+        <_prenom>Antoine</_prenom>
+        <_roles>
+          <Role>
+            <Nom>null</Nom>
+          </Role>
+        </_roles>
+        <Nom>Parize</Nom>
+        <Prenom>Antoine</Prenom>
+        <Roles>
+          <Role>
+            <Nom>null</Nom>
+          </Role>
+        </Roles>
+        <_promotion>2022</_promotion>
+        <_annee>1A</_annee>
+        <Promotion>2022</Promotion>
+        <Annee>1A</Annee>
+      </Eleve>
+      <Eleve>
+        <_nom>Gass</_nom>
+        <_prenom>Aurélie</_prenom>
+        <_roles>
+          <Role>
+            <Nom>Null</Nom>
+          </Role>
+        </_roles>
+        <Nom>Gass</Nom>
+        <Prenom>Aurélie</Prenom>
+        <Roles>
+          <Role>
+            <Nom>Null</Nom>
+          </Role>
+        </Roles>
+        <_promotion>2022</_promotion>
+        <_annee>1A</_annee>
+        <Promotion>2022</Promotion>
+        <Annee>1A</Annee>
+      </Eleve>
+    </Eleves>
+    <DateDebut>
+      <Jour>04</Jour>
+      <Mois>03</Mois>
+      <Annee>2020</Annee>
+    </DateDebut>
+    <DateFin>
+      <Jour>17</Jour>
+      <Mois>04</Mois>
+      <Annee>2020</Annee>
     </DateFin>
   </Projet>
 </ArrayOfProjet>

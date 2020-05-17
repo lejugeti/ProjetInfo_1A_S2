@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Program
 {
@@ -26,7 +27,7 @@ namespace Program
                 foreach (var eleve in projet.Eleves)
                 {
                     // Si le nom de l'élève correspond au nom entré
-                    if (eleve.Nom.ToLower().Equals(nomEleve.ToLower()))
+                    if (eleve.Nom.ToLower().Equals(nomEleve.ToLower()) && !projetsEleve.Contains(projet))
                     {
                         projetsEleve.Add(projet);
                     }
@@ -50,7 +51,7 @@ namespace Program
             foreach (var projet in projets)
             {
                 // Si la date de fin du projet correspond à l'année entrée
-                if (projet.DateFin.GetAnnee() == annee)
+                if (projet.DateFin.GetAnnee() == annee && !projetsAnnee.Contains(projet))
                 {
                     projetsAnnee.Add(projet);
                 }
@@ -76,7 +77,7 @@ namespace Program
                 foreach (var promo in projet.Promotions)
                 {
                     // Si la promotion de l'élève correspond à la promotion entrée
-                    if (promo.ToLower().Equals(promotion.ToLower()))
+                    if (promo.ToLower().Equals(promotion.ToLower()) && !projetsPromotion.Contains(projet))
                     {
                         projetsPromotion.Add(projet);
                     }
@@ -94,7 +95,7 @@ namespace Program
         public static List<Projet> RechercheParMotsClefs(String motClef)
         {
             Projet[] projets = Catalogue.Projets;
-            List<Projet> projetsMotClefs = new List<Projet>();
+            List<Projet> projetsMotsClefs = new List<Projet>();
 
             // Pour chaque projet
             foreach (var projet in projets)
@@ -103,14 +104,14 @@ namespace Program
                 foreach (var motcle in projet.MotsCles)
                 {
                     // Si le mot clé en cours correspond au mot clé entré
-                    if (motcle.ToLower().Equals(motClef.ToLower()))
+                    if (motcle.ToLower().Equals(motClef.ToLower()) && !projetsMotsClefs.Contains(projet))
                     {
-                        projetsMotClefs.Add(projet);
+                        projetsMotsClefs.Add(projet);
                     }
                 }
             }
 
-            return projetsMotClefs;
+            return projetsMotsClefs;
         }
 
         /*
@@ -123,11 +124,14 @@ namespace Program
             Projet[] projets = Catalogue.Projets;
             List<Projet> projetsIntitule = new List<Projet>();
 
+            // Création d'un regex pour matcher les projets grâce à leur intitulé
+            Regex regexIntitule = new Regex(intitule);
+
             // Pour tous les projets
             foreach (var projet in projets)
             {
-                // Si l'intitulé du projet en cours correspond à l'intitulé entré
-                if (projet.Intitule.ToLower().Equals(intitule.ToLower()))
+                // Si l'intitulé du projet en cours contient la recherche rentrée
+                if (regexIntitule.Match(projet.Intitule).Success && !projetsIntitule.Contains(projet))
                 {
                     projetsIntitule.Add(projet);
                 }
@@ -166,31 +170,31 @@ namespace Program
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par élève
             foreach (var projet in projetsEleve)
             {
-                projets.Add(projet);
+                if(!projets.Contains(projet)) projets.Add(projet);
             }
 
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par année
             foreach (var projet in projetsAnnee)
             {
-                projets.Add(projet);
+                if (!projets.Contains(projet)) projets.Add(projet);
             }
 
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par promotion
             foreach (var projet in projetsPromotion)
             {
-                projets.Add(projet);
+                if (!projets.Contains(projet)) projets.Add(projet);
             }
 
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par mot clé
             foreach (var projet in projetsMotsclef)
             {
-                projets.Add(projet);
+                if (!projets.Contains(projet)) projets.Add(projet);
             }
 
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par intitulé
             foreach (var projet in projetsIntitule)
             {
-                projets.Add(projet);
+                if (!projets.Contains(projet)) projets.Add(projet);
             }
 
             return projets;

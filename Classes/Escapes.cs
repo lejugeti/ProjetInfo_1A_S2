@@ -6,15 +6,13 @@ using System.Xml.Serialization;
 
 namespace Program
 {
+    /*
+     * Classe permettant de gérer l'alignement de l'affichage dans la console en stockant
+     * des espaces et en permettant de les afficher de manière "propre".
+     */
     public class Escapes
     {
         public List<string> Spaces { get; set; }
-
-        public string this[int i]
-        {
-            get { return Spaces[i]; }
-            set { Spaces[i] = value; }
-        }
 
         //Constructeur
         public Escapes()
@@ -22,6 +20,7 @@ namespace Program
             Spaces = new List<string>();
         }
 
+        //Crée un objet Escapes en ajoutant directement 
         public Escapes(string newSpaces)
         {
             Spaces = new List<string>();
@@ -29,6 +28,10 @@ namespace Program
         }
         
         //Méthodes
+
+        /*
+         * Affiche les espaces contenus dans l'instance d'objet Escapes pour décaler l'affichage
+         */
         public void Print()
         {
             for (int i = 0; i < Spaces.Count; i++)
@@ -37,6 +40,9 @@ namespace Program
             }
         }
 
+        /*
+         * Ajoute un ensemble d'espaces à l'instance de l'objet.
+         */
         public void Add(string spaces)
         {
             Spaces.Add(new String(' ', spaces.Length + 1));
