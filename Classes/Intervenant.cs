@@ -5,9 +5,10 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace Program
-{   
+{
+    // on indique au sérialiseur quels types peut prendre un objet Intervenant
     [XmlInclude(typeof(Enseignant))]
-    [XmlInclude(typeof(Externe))]
+    [XmlInclude(typeof(Externe))]       
     [XmlInclude(typeof(Eleve))]
     public class Intervenant
     {
@@ -45,11 +46,18 @@ namespace Program
             _prenom = prenom;
             _roles = roles;
         }
+
+        //Constructeur vide utilisé par lors de la désérialisation
         public Intervenant()
         {
 
         }
         //Méthodes
+
+        /*
+         * Interface de création d'un intervenant. Cette fonction permet de créer tous les types 
+         * d'intervenants possibles en demandant à l'utilisateur quel type d'intervenant il veut créer.
+         */
         public static Intervenant CreateIntervenant()
         {
             Console.Write("\nLe nom de la personne : ");
@@ -213,41 +221,11 @@ namespace Program
             }
         }
 
-        public virtual void PrintInfos()
-        {
-            Console.WriteLine("==== Intervenant ====");
-            Console.WriteLine($"Nom : {Nom}");
-            Console.WriteLine($"Prénom : {Prenom}");
-
-            //Rôles
-            Console.Write($"Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-        }
-
-        public virtual void PrintInfos(string role)
-        {
-            Escapes escapes = new Escapes(new String(' ', role.Length + 1));
-            Console.Write($"{role} ");
-            Console.WriteLine($"Nom : {Nom}");
-            escapes.Print();
-            Console.WriteLine($"Prénom : {Prenom}");
-
-            //Rôles
-            escapes.Print();
-            Console.Write($"Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-        }
-        
+        /*
+         * Affiche l'ensemble des informations d'un intervenant en spécifiant son statut à afficher.
+         * @arg escapes, un objet Escapes permettant de gérer les espaces dans la console pour aligner les éléments à afficher.
+         * @arg nomInfo, le statut de l'intervenant à afficher.
+         */
         public virtual void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             
@@ -298,12 +276,21 @@ namespace Program
             _laboratoire = laboratoire;
             _matiere = matiere;
         }
+
+        //Constructeur vide utilisé par lors de la désérialisation
         public Enseignant()
         {
 
         }
 
         //Méthodes
+
+        /*
+         * Interface de création d'un Enseignant. L'utilisateur doit rentrer l'ensemble des informations nécessaire à la création
+         * @arg nom, le nom de l'Enseignant
+         * @arg prénom, le prénnom de l'Enseignant
+         * @arg roles, l'ensemble des roles de l'Enseignant
+         */
         public static Enseignant CreateEnseignant(string nom, string prenom, Role[] roles)
         {
             //Laboratoire
@@ -318,45 +305,12 @@ namespace Program
             return new Enseignant(nom, prenom, roles, labInput, matiere);
         }
 
-        public override void PrintInfos()
-        {
-            Console.WriteLine("==== Enseignant ====");
-            Console.WriteLine($"Nom : {Nom}");
-            Console.WriteLine($"Prénom : {Prenom}");
-
-            //Rôles
-            Console.Write($"Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-
-            Console.WriteLine($"Labo : {Laboratoire} ");
-            Matiere.PrintInfos();
-        }
-
-        public override void PrintInfos(string role)
-        {
-            string escapes = new String(' ', role.Length + 1);
-            Console.Write($"{role} ");
-            Console.WriteLine($"|Nom : {Nom}");
-            Console.WriteLine($"{escapes}|Prénom : {Prenom}");
-
-            //Rôles
-            Console.Write($"{escapes}|Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-
-            Console.WriteLine($"Labo : {Laboratoire} ");
-            Matiere.PrintInfos();
-        }
-
+        
+        /*
+         * Affiche l'ensemble des informations de l'enseignant en spécifiant son statut à afficher.
+         * @arg escapes, un objet Escapes permettant de gérer les espaces dans la console pour aligner les éléments à afficher.
+         * @arg nomInfo, le statut de l'enseignant à afficher.
+         */
         public override void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
@@ -386,7 +340,6 @@ namespace Program
         }
     }
 
-
     public class Externe : Intervenant
     {
         public string _organisme;
@@ -403,12 +356,21 @@ namespace Program
         {
             _organisme = organisme;
         }
+
+        //Constructeur vide utilisé par lors de la désérialisation
         public Externe()
         {
 
         }
 
         //Méthodes 
+
+        /*
+         * Interface de création d'un Externe. L'utilisateur doit rentrer l'ensemble des informations nécessaire à la création
+         * @arg nom, le nom de l'Externe
+         * @arg prénom, le prénnom de l'Externe
+         * @arg roles, l'ensemble des roles de l'Externe
+         */
         public static Externe CreateExterne(string nom, string prenom, Role[] roles)
         {
             Console.Write("Entrez l'oganisme de l'intervenant : ");
@@ -417,43 +379,12 @@ namespace Program
             return new Externe(nom, prenom, roles, organisme);
         }
 
-        public override void PrintInfos()
-        {
-            Console.WriteLine("==== Personne Externe ====");
-            Console.WriteLine($"Nom : {Nom}");
-            Console.WriteLine($"Prénom : {Prenom}");
 
-            //Rôles
-            Console.Write($"Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-
-            Console.WriteLine($"Organisme : {Organisme} ");
-
-        }
-        public override void PrintInfos(string role)
-        {
-            string escapes = new String(' ', role.Length + 1);
-            Console.Write($"{role} ");
-            Console.WriteLine($"|Nom : {Nom}");
-            Console.WriteLine($"{escapes}|Prénom : {Prenom}");
-
-            //Rôles
-            Console.Write($"{escapes}|Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-
-            Console.WriteLine($"{escapes}|Organisme : {Organisme} ");
-        }
-
+        /*
+         * Affiche l'ensemble des informations de l'Externe en spécifiant son statut à afficher.
+         * @arg escapes, un objet Escapes permettant de gérer les espaces dans la console pour aligner les éléments à afficher.
+         * @arg nomInfo, le statut de l'Externe à afficher.
+         */
         public override void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
@@ -506,12 +437,21 @@ namespace Program
             _promotion = promotion;
             _annee = annee;
         }
+
+        //Constructeur vide utilisé par lors de la désérialisation
         public Eleve()
         {
 
         }
 
         //Méthodes
+
+        /*
+         * Interface de création d'un Eleve. L'utilisateur doit rentrer l'ensemble des informations nécessaire à la création
+         * @arg nom, le nom de l'Eleve
+         * @arg prénom, le prénnom de l'Eleve
+         * @arg roles, l'ensemble des roles de l'Eleve
+         */
         public static Eleve CreateEleve(string nom, string prenom, Role[] roles)
         {
             // promotion de l'élève
@@ -568,45 +508,11 @@ namespace Program
             return new Eleve(nom, prenom, roles, promoInput, anneeInput);
         }
 
-        public override void PrintInfos()
-        {
-            Console.WriteLine("==== Eleve ====");
-            Console.WriteLine($"Nom : {Nom}");
-            Console.WriteLine($"Prénom : {Prenom}");
-
-            //Rôles
-            Console.Write($"Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-
-            Console.WriteLine($"Promotion : {Promotion}");
-            Console.WriteLine($"Année : {Annee}");
-        }
-
-        public override void PrintInfos(string role)
-        {
-            string escapes = new String(' ', role.Length + 1);
-            Console.Write($"{role} ");
-            Console.WriteLine($"|Nom : {Nom}");
-            Console.WriteLine($"{escapes}|Prénom : {Prenom}");
-
-            //Rôles
-            Console.Write($"{escapes}|Roles : ");
-            for (int i = 0; i < Roles.Length; i++)
-            {
-                Console.Write($"{i + 1}.");
-                this[i].PrintInfos();
-            }
-            Console.WriteLine("");
-
-            Console.WriteLine($"{escapes}|Promotion : {Promotion}");
-            Console.WriteLine($"{escapes}|Année : {Annee}");
-        }
-
+        /*
+         * Affiche l'ensemble des informations de l'Eleve en spécifiant son statut à afficher.
+         * @arg escapes, un objet Escapes permettant de gérer les espaces dans la console pour aligner les éléments à afficher.
+         * @arg nomInfo, le statut de l'Eleve à afficher.
+         */
         public override void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);

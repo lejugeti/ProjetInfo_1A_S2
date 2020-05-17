@@ -58,15 +58,15 @@ namespace Program
         {
             Catalogue catalogue = new Catalogue();
 
-            Console.Clear();
-            Console.WriteLine("========= Logiciel de consultation des projets de l'ENSC =========\n");
-            AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Consulter l'ensemble des projets", "Ajouter un projet", "Quitter" });
-
             bool doneRep = false;
             bool error = false;
             string rep;
             do
             {
+                Console.Clear();
+                Console.WriteLine("========= Logiciel de consultation des projets de l'ENSC =========\n");
+                AfficherGrilleChoix("Que voulez-vous faire ?", new string[] { "Consulter l'ensemble des projets", "Ajouter un projet", "Quitter" });
+
                 if (error)
                 {
                     Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
@@ -76,12 +76,12 @@ namespace Program
                 if (rep == "1")
                 {
                     ConsulterProjets();
-                    doneRep = true;
+                    doneRep = false;
                 }
                 else if (rep == "2")
                 {
                     AjouterProjet(false);
-                    doneRep = true;
+                    doneRep = false;
                 }
                 else if (rep == "3")
                 {
@@ -208,7 +208,7 @@ namespace Program
 
             string rep = Console.ReadLine();
             int repAffichage = TryParseReponse(rep); // le numéro du projet que l'utilisateur veut consulter
-            
+
             if (repAffichage > Catalogue.Projets.Length || repAffichage <= 0)
             {
                 ConsulterProjetParticulier(true);
@@ -230,6 +230,8 @@ namespace Program
                     {
                         Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
                     }
+
+                    Console.Write("Votre réponse : ");
                     repProjetParticulier = Console.ReadLine();
 
                     //Revenir au menu précédent
@@ -293,6 +295,8 @@ namespace Program
                     {
                         Console.Write("Ce que vous avez entré est incorrect \nRentrez à nouveau votre réponse : ");
                     }
+
+                    Console.Write("Votre réponse : ");
                     repProjetParticulier = Console.ReadLine();
 
                     //Revenir au menu précédent
@@ -342,7 +346,7 @@ namespace Program
                 Console.WriteLine("======= Recherche de Projet =======");
 
                 if (error) Console.WriteLine("\n Ce que vous avez rentré est incorrect, recommencez.");
-                AfficherGrilleChoix("Quel type de recherche souhaitez-vous faire ?", new string[] { "Recherche générale", "Par nom d'élève", "Par année de réalisation", "Par promotion", "Par mots clés", "Revenir au menu précédent" });
+                AfficherGrilleChoix("Quel type de recherche souhaitez-vous faire ?", new string[] { "Recherche générale", "Par intitulé", "Par nom d'élève", "Par année de réalisation", "Par promotion", "Par mots clés", "Revenir au menu précédent" });
 
                 Console.Write("Votre réponse : ");
                 string rep = Console.ReadLine();
@@ -354,25 +358,30 @@ namespace Program
                 }
                 else if (rep == "2")
                 {
-                    EffectuerRecherchePrecise("Par Elève");
+                    EffectuerRecherchePrecise("Par intitulé");
                     error = false;
                 }
                 else if (rep == "3")
                 {
-                    EffectuerRecherchePrecise("Par année");
+                    EffectuerRecherchePrecise("Par Elève");
                     error = false;
                 }
                 else if (rep == "4")
                 {
-                    EffectuerRecherchePrecise("Par Promotion");
+                    EffectuerRecherchePrecise("Par année");
                     error = false;
                 }
                 else if (rep == "5")
                 {
-                    EffectuerRecherchePrecise("Par mots clés");
+                    EffectuerRecherchePrecise("Par Promotion");
                     error = false;
                 }
                 else if (rep == "6")
+                {
+                    EffectuerRecherchePrecise("Par mots clés");
+                    error = false;
+                }
+                else if (rep == "7")
                 {
                     //Permet de sortir du module de recherche
                     doneRecherches = true;
@@ -404,6 +413,10 @@ namespace Program
             if (type == "Générale")
             {
                 resultats = Recherche.RechercheGenerale(recherche);
+            }
+            else if (type == "Par intitulé")
+            {
+                resultats = Recherche.RechercheParIntitule(recherche);
             }
             else if (type == "Par Elève")
             {
@@ -561,11 +574,10 @@ namespace Program
                 {
                     errorMaj = false;
                     projetToChange.MiseAJour(reponse);
+                    Catalogue.Projets[indexProjet] = projetToChange;
+                    Catalogue.Save();
                 }
             }
-
-            Catalogue.Projets[indexProjet] = projetToChange;
-            Catalogue.Save();
         }
 
         /*

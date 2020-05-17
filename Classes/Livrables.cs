@@ -43,17 +43,18 @@ namespace Program
             _description = description;
             _lienExterne = lien;
         }
-        public Livrable(string type, Projet.Date deadline, string description)
-        {
-            _type = type;
-            _deadline = deadline;
-            _description = description;
-        }
+        
+        //Constructeur vide utilisé par lors de la désérialisation
         public Livrable()
         {
 
         }
         //Méthodes
+
+        /*
+         * Interface de création de livrables pour l'utilisateur
+         * @return un nouveau livrable
+         */
         public static Livrable CreateLivrable()
         {
             
@@ -95,18 +96,10 @@ namespace Program
             return new Livrable(type, deadline, description, lien);
         }
 
-        public void PrintInfos()
-        {
-            Console.WriteLine("==== Livrable ====");
-
-            Console.WriteLine($"Type : {Type}");
-            Console.WriteLine($"Deadline : ");
-            Deadline.Print();
-            Console.WriteLine($"Description : {Description}");
-            
-            if(LienExterne!=null) Console.WriteLine(LienExterne);
-        }
-
+        /*
+         * Affiche l'ensemble des informations du livrable en respectant l'alignement
+         * @arg escapes, un objet Escapes capable de gérer les espaces pour aligner l'affichage
+         */
         public void PrintInfos(Escapes escapes)
         { 
             Console.WriteLine($" |Type : {Type}");

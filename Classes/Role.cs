@@ -18,23 +18,27 @@ namespace Program
         }
 
         //Constructeurs
+
+        /*
+         * Crée une instance de Role en spécifiant directement le nom du rôle
+         */
         public Role(string nom)
         {
             _nom = nom;
         }
+
+        //Constructeur vide utilisé par lors de la désérialisation
         public Role()
         {
             
         }
+
+
         //Méthodes
-        public static Role CreateRole()
-        {
-            Console.Write("Indiquez le rôle de cette personne : ");
-            string role = Console.ReadLine();
 
-            return new Role(role);
-        }
-
+        /*
+         * Affiche dans la console le nom du rôle
+         */
         public void PrintInfos()
         {
             Console.Write($"{Nom} ");

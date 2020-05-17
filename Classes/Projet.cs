@@ -60,11 +60,9 @@ namespace Program
             {
                 return $"{Jour}/{Mois}/{Annee}";
             }
-            /* INSERER FONCTION IsChronologic qui vérifie si la date de début est bien antérieure à celle de fin*/
         }
 
         //Propriétés
-        public static int IdGlobal { get; set; } = 0;
         public int Id { get; set; }
         public string Intitule { get; set; }
         public string Type { get; set; }
@@ -85,7 +83,7 @@ namespace Program
         public Projet(string intitule, string type, int nbEleves, string[] promos, string sujet, string[] motsCles, Intervenant client, Livrable[] livrables, Intervenant[] encadrants,
             Intervenant[] reviewers, Eleve[] eleves, Date debut, Date fin)
         {
-            Id = IdGlobal++;
+            Id = ++Catalogue.IdMaxProjets;
             Intitule = intitule;
             Type = type;
             NbEleves = nbEleves;
@@ -101,12 +99,14 @@ namespace Program
             DateFin = fin;
         }
 
+        //Constructeur vide utilisé par lors de la désérialisation
         public Projet()
         {
 
         }
 
         //Méthodes
+
         public static Projet CreateProjet()
         {
             //Fonction nécessaires
@@ -119,7 +119,7 @@ namespace Program
 
             string AjoutTypeProjet()
             {
-                Console.WriteLine("Quel est le type de votre projet ?");
+                Console.WriteLine("\nQuel est le type de votre projet ?");
                 string tmpType = Console.ReadLine();
                 return tmpType;
             }

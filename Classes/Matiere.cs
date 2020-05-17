@@ -30,12 +30,18 @@ namespace Program
             Nom = nom;
             Code = code;
         }
+
+        //Constructeur vide utilisé par lors de la désérialisation
         public Matiere()
         {
 
         }
 
         //Méthode
+
+        /*
+         * Interface de création de la matière. L'utilisateur doit rentrer toutes les informations nécessaires à la création
+         */
         public static Matiere CreateMatiere()
         {
             Console.Write("Rentrez la matière de l'enseignant : ");
@@ -46,14 +52,11 @@ namespace Program
             return new Matiere(nom, code);
         }
 
-        public void PrintInfos()
-        {
-            Console.Write("Matière");
-            Console.WriteLine($" | Nom : {Nom}");
-            Console.WriteLine($"        | Code : {Code}");
-            Console.WriteLine("");
-        }
-
+        /*
+         * Affiche l'ensemble des informations de la matière en respectant l'alignement
+         * @arg escapes, un objet Escapes capable de gérer les espaces pour aligner l'affichage
+         * @arg nomInfo, le nom de l'information à afficher (ici "Matière")
+         */
         public virtual void PrintInfosCol(Escapes escapes, string nomInfo)
         {
             escapes.Add(nomInfo);
