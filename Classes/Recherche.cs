@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Program
@@ -9,7 +7,7 @@ namespace Program
     static class Recherche
     {
         //Méthodes
-        
+
         /*
          * Recherche par élève
          * @param nomEleve Le nom de famille de l'élève concerné par la recherche
@@ -19,7 +17,7 @@ namespace Program
         {
             Projet[] projets = Catalogue.Projets;
             List<Projet> projetsEleve = new List<Projet>();
-            
+
             // Pour chaque projet
             foreach (var projet in projets)
             {
@@ -71,7 +69,7 @@ namespace Program
             List<Projet> projetsPromotion = new List<Projet>();
 
             // Pour chaque projet
-            foreach (var projet in projets) 
+            foreach (var projet in projets)
             {
                 // Pour chaque promo associés à ce projet
                 foreach (var promo in projet.Promotions)
@@ -170,7 +168,7 @@ namespace Program
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par élève
             foreach (var projet in projetsEleve)
             {
-                if(!projets.Contains(projet)) projets.Add(projet);
+                if (!projets.Contains(projet)) projets.Add(projet);
             }
 
             // On ajoute à la liste de projet tous les projets récupérés par la recherche par année
@@ -198,6 +196,6 @@ namespace Program
             }
 
             return projets;
-        }      
+        }
     }
 }

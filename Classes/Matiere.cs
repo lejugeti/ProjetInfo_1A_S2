@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Program
 {
@@ -66,7 +62,7 @@ namespace Program
             Console.WriteLine($" |Nom : {Nom}");
             escapes.Print();
             Console.WriteLine($"Code : {Code}");
-            
+
             escapes.Spaces.RemoveAt(1);
         }
     }

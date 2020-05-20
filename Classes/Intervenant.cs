@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace Program
 {
     // on indique au sérialiseur quels types peut prendre un objet Intervenant
     [XmlInclude(typeof(Enseignant))]
-    [XmlInclude(typeof(Externe))]       
+    [XmlInclude(typeof(Externe))]
     [XmlInclude(typeof(Eleve))]
     public class Intervenant
     {
@@ -228,7 +227,7 @@ namespace Program
          */
         public virtual void PrintInfosCol(Escapes escapes, string nomInfo)
         {
-            
+
             escapes.Add(nomInfo); //On ajoute l'ensemble des espaces pour aligner les infos
             Console.Write(nomInfo);
 
@@ -305,7 +304,7 @@ namespace Program
             return new Enseignant(nom, prenom, roles, labInput, matiere);
         }
 
-        
+
         /*
          * Affiche l'ensemble des informations de l'enseignant en spécifiant son statut à afficher.
          * @arg escapes, un objet Escapes permettant de gérer les espaces dans la console pour aligner les éléments à afficher.
@@ -329,7 +328,7 @@ namespace Program
                 Console.Write($"{i + 1}.");
                 this[i].PrintInfos();
             }
-            
+
             Console.WriteLine("");
             escapes.Print();
             Console.WriteLine($"Laboratoire : {Laboratoire}");

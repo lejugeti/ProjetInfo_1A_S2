@@ -154,7 +154,9 @@ namespace Program
                 bool done = false;
                 while (!done)
                 {
-                    Console.Write("Entrez un mot clé ou tapez Y pour quitter : ");
+                    if(listeMotsCles.Count == 0) Console.Write("Entrez un mot clé : ");
+                    else Console.Write("Entrez un mot clé ou tapez Y pour quitter : ");
+
                     string input = Console.ReadLine();
 
                     if (input.ToUpper() == "Y" && listeMotsCles.Count > 0)
@@ -208,7 +210,7 @@ namespace Program
 
                     if (listeEncadrants.Count == 0)
                     {
-                        Console.WriteLine("Rentrez à présent les informations du premier encadrant");
+                        Console.WriteLine("\nRentrez à présent les informations du premier encadrant");
                         listeEncadrants.Add(Intervenant.CreateIntervenant(new Role("Encadrant")));
                     }
                     else
@@ -238,7 +240,7 @@ namespace Program
 
                     if (listeReviewers.Count == 0)
                     {
-                        Console.WriteLine("Rentrez à présent les informations du premier reviewer");
+                        Console.WriteLine("\nRentrez à présent les informations du premier reviewer");
                         listeReviewers.Add(Intervenant.CreateIntervenant(new Role("Reviewer")));
                     }
                     else

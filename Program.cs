@@ -315,7 +315,8 @@ namespace Program
                     else if (repProjetParticulier == "3")
                     {
                         int removeId = projets[repAffichage - 1].Id;
-                        Catalogue.RemoveProjet(removeId - 1);
+                        Catalogue.RemoveProjet(removeId);
+                        projets.RemoveAt(repAffichage - 1);
                         doneProjetParticulier = true;
                     }
 

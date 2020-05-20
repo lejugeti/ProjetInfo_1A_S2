@@ -67,7 +67,7 @@ namespace Program
          */
         public static int FindProjet(int idProjet)
         {
-            for(int i = 0; i < Projets.Length; i++)
+            for (int i = 0; i < Projets.Length; i++)
             {
                 if (Projets[i].Id == idProjet) return i;
             }

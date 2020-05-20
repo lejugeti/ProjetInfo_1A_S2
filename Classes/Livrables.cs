@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Program
 {
@@ -38,12 +34,12 @@ namespace Program
         //Constructeurs
         public Livrable(string type, Projet.Date deadline, string description, string lien)
         {
-            _type = type; 
+            _type = type;
             _deadline = deadline;
             _description = description;
             _lienExterne = lien;
         }
-        
+
         //Constructeur vide utilisé par lors de la désérialisation
         public Livrable()
         {
@@ -57,7 +53,7 @@ namespace Program
          */
         public static Livrable CreateLivrable()
         {
-            
+
             Console.WriteLine("\nVeuillez rentrer les informations relatives au nouveau livrable");
             Console.Write("Le type de votre livrable : ");
             string type = Console.ReadLine();
@@ -66,7 +62,7 @@ namespace Program
             bool errorDeadline = false;
             do
             {
-                if(errorDeadline) Console.Write("\nLa date est incorrecte, utilisez le format dd/mm/yyyy : ");
+                if (errorDeadline) Console.Write("\nLa date est incorrecte, utilisez le format dd/mm/yyyy : ");
                 else Console.Write("Sa deadline (dd/mm/yyyy): ");
 
                 deadlineInput = Console.ReadLine();
@@ -101,13 +97,13 @@ namespace Program
          * @arg escapes, un objet Escapes capable de gérer les espaces pour aligner l'affichage
          */
         public void PrintInfos(Escapes escapes)
-        { 
+        {
             Console.WriteLine($" |Type : {Type}");
             escapes.Print();
             Console.WriteLine($"Deadline : {Deadline.GetDateFormatee()}");
             escapes.Print();
             Console.WriteLine($"Description : {Description}");
-            
+
             if (LienExterne != null)
             {
                 escapes.Print();

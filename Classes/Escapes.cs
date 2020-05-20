@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Program
 {
@@ -26,7 +23,7 @@ namespace Program
             Spaces = new List<string>();
             Spaces.Add(new String(' ', newSpaces.Length + 1));
         }
-        
+
         //Méthodes
 
         /*

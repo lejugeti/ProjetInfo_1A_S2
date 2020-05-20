@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Program
 {
@@ -30,7 +26,7 @@ namespace Program
         //Constructeur vide utilisé par lors de la désérialisation
         public Role()
         {
-            
+
         }
 
 
